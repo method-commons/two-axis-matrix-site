@@ -1,0 +1,2071 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2-Achsen-Matrix</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%234f46e5'/%3E%3Cpath%20d='M8.5%206.5V23.5H25.5'%20fill='none'%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='14'%20cy='13.5'%20r='2.7'%20fill='%23fff'/%3E%3Ccircle%20cx='20.5'%20cy='18'%20r='2.7'%20fill='%23fff'/%3E%3Ccircle%20cx='21.5'%20cy='9.5'%20r='2.1'%20fill='%23fb923c'/%3E%3C/svg%3E">
+<meta name="description" content="Eine kompakte Schulung zu 2-Achsen-Methoden: Eisenhower-Matrix, Wert/Aufwand, Macht/Interesse, Risikomatrix und Stacey-Matrix – gute Achsen, sauberes Einordnen, Maßnahmen ableiten, mit interaktiver Matrix-Werkstatt und Wissenscheck.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --surface-2: #efede6;
+    --text: #1d1d1b;
+    --muted: #5d5c57;
+    --line: #dcd9cf;
+    --accent: #2f5bd3;
+    --logo: #4f46e5;
+    --accent-soft: #e3eafc;
+    --accent-text: #ffffff;
+    --ok: #1f7a4d;
+    --ok-soft: #dff2e8;
+    --warn: #a4501a;
+    --warn-soft: #fbe9dc;
+    --bad: #b42323;
+    --bad-soft: #fde4e4;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 24px rgba(0,0,0,.06);
+    --radius: 14px;
+    --maxw: 1080px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141413;
+      --surface: #1d1d1b;
+      --surface-2: #262623;
+      --text: #ecebe6;
+      --muted: #a3a29b;
+      --line: #36352f;
+      --accent: #7c9cf5;
+      --logo: #8b8cf8;
+      --accent-soft: #23305a;
+      --accent-text: #0f1424;
+      --ok: #6fd1a0;
+      --ok-soft: #173a29;
+      --warn: #f2a46f;
+      --warn-soft: #3d2516;
+      --bad: #ff8f8f;
+      --bad-soft: #3d1a1c;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141413;
+    --surface: #1d1d1b;
+    --surface-2: #262623;
+    --text: #ecebe6;
+    --muted: #a3a29b;
+    --line: #36352f;
+    --accent: #7c9cf5;
+    --logo: #8b8cf8;
+    --accent-soft: #23305a;
+    --accent-text: #0f1424;
+    --ok: #6fd1a0;
+    --ok-soft: #173a29;
+    --warn: #f2a46f;
+    --warn-soft: #3d2516;
+    --bad: #ff8f8f;
+    --bad-soft: #3d1a1c;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 24px rgba(0,0,0,.35);
+  }
+
+  /* Farben der Bereiche – wie in der App (--c Linie/Schrift, --c-bg Fläche, --c-line Rand, --c-strong kräftige Fläche) */
+  .c-red { --c: #c92a2a; --c-bg: #fff0f0; --c-line: #fbd3cf; --c-strong: #ffc0c0; }
+  .c-orange { --c: #a35200; --c-bg: #fff4e0; --c-line: #fbdcae; --c-strong: #ffd8a8; }
+  .c-yellow { --c: #7a5a00; --c-bg: #fdf6d3; --c-line: #f1e09a; --c-strong: #fdf0b8; }
+  .c-green { --c: #2b8a3e; --c-bg: #ebf8ee; --c-line: #c6ebcf; --c-strong: #d3f2da; }
+  .c-teal { --c: #0e7490; --c-bg: #e3f6f9; --c-line: #b3e3ec; --c-strong: #c5edf3; }
+  .c-blue { --c: #1864ab; --c-bg: #e7f1fc; --c-line: #b6d4f2; --c-strong: #cfe3f8; }
+  .c-violet { --c: #7c3aed; --c-bg: #f3ecff; --c-line: #dccbfb; --c-strong: #e5d7fd; }
+  .c-gray { --c: #667085; --c-bg: #f2f4f7; --c-line: #e4e7ec; --c-strong: #e4e7ec; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .c-red { --c: #ff8787; --c-bg: #2e1718; --c-line: #6b2a2d; --c-strong: #5a2224; }
+    :root:not([data-theme="light"]) .c-orange { --c: #ffc078; --c-bg: #2e2112; --c-line: #6b4a1c; --c-strong: #5a3a14; }
+    :root:not([data-theme="light"]) .c-yellow { --c: #ffe066; --c-bg: #2b2712; --c-line: #5e5420; --c-strong: #4d4515; }
+    :root:not([data-theme="light"]) .c-green { --c: #8ce99a; --c-bg: #142a1b; --c-line: #2b5a36; --c-strong: #1f4a2a; }
+    :root:not([data-theme="light"]) .c-teal { --c: #66d9e8; --c-bg: #10282d; --c-line: #1f5560; --c-strong: #1a444c; }
+    :root:not([data-theme="light"]) .c-blue { --c: #a5d8ff; --c-bg: #142538; --c-line: #24476b; --c-strong: #1d3b5a; }
+    :root:not([data-theme="light"]) .c-violet { --c: #c4b5fd; --c-bg: #231a38; --c-line: #48367a; --c-strong: #3a2b63; }
+    :root:not([data-theme="light"]) .c-gray { --c: #adb5bd; --c-bg: #1d2129; --c-line: #333a47; --c-strong: #2b313c; }
+  }
+  :root[data-theme="dark"] .c-red { --c: #ff8787; --c-bg: #2e1718; --c-line: #6b2a2d; --c-strong: #5a2224; }
+  :root[data-theme="dark"] .c-orange { --c: #ffc078; --c-bg: #2e2112; --c-line: #6b4a1c; --c-strong: #5a3a14; }
+  :root[data-theme="dark"] .c-yellow { --c: #ffe066; --c-bg: #2b2712; --c-line: #5e5420; --c-strong: #4d4515; }
+  :root[data-theme="dark"] .c-green { --c: #8ce99a; --c-bg: #142a1b; --c-line: #2b5a36; --c-strong: #1f4a2a; }
+  :root[data-theme="dark"] .c-teal { --c: #66d9e8; --c-bg: #10282d; --c-line: #1f5560; --c-strong: #1a444c; }
+  :root[data-theme="dark"] .c-blue { --c: #a5d8ff; --c-bg: #142538; --c-line: #24476b; --c-strong: #1d3b5a; }
+  :root[data-theme="dark"] .c-violet { --c: #c4b5fd; --c-bg: #231a38; --c-line: #48367a; --c-strong: #3a2b63; }
+  :root[data-theme="dark"] .c-gray { --c: #adb5bd; --c-bg: #1d2129; --c-line: #333a47; --c-strong: #2b313c; }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.2; margin: 0 0 .5em; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: -.01em; }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  h3 { font-size: 1.15rem; font-family: Inter, sans-serif; font-weight: 600; }
+  p { margin: 0 0 1em; }
+  a { color: var(--accent); }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; font-weight: 600; color: var(--accent); margin-bottom: .75em; display: block; }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 62ch; }
+  .muted { color: var(--muted); }
+  .small { font-size: .9rem; }
+
+  /* Nav */
+  nav.top {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.top .wrap { display: flex; align-items: center; gap: 24px; height: 60px; }
+  .brand { font-weight: 700; text-decoration: none; color: var(--text); display: flex; gap: 10px; align-items: center; white-space: nowrap; }
+  .logo {
+    width: 28px; height: 28px; flex-shrink: 0; color: var(--logo);
+    filter: drop-shadow(0 2px 4px color-mix(in srgb, var(--logo) 35%, transparent));
+  }
+  nav.top ul { list-style: none; margin: 0 0 0 auto; padding: 0; display: flex; gap: 18px; font-size: .9rem; }
+  nav.top ul a { color: var(--muted); text-decoration: none; }
+  nav.top ul a:hover { color: var(--text); }
+  .menu-toggle { display: none; background: none; border: 1px solid var(--line); color: var(--text); border-radius: 999px; height: 34px; padding: 0 14px; font: 600 .85rem Inter, sans-serif; cursor: pointer; align-items: center; gap: 6px; }
+  @media (max-width: 960px) {
+    nav.top .wrap { gap: 10px; }
+    .menu-toggle { display: inline-flex; }
+    nav.top ul {
+      display: none; position: absolute; left: 0; right: 0; top: 60px;
+      flex-direction: column; gap: 0; margin: 0; padding: 8px 16px 16px;
+      background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: var(--shadow);
+      max-height: calc(100vh - 60px); overflow-y: auto;
+    }
+    nav.top.open ul { display: flex; }
+    nav.top ul a { display: block; padding: 12px 4px; font-size: 1rem; border-bottom: 1px solid var(--line); }
+    nav.top ul li:last-child a { border-bottom: 0; }
+  }
+  @media (max-width: 400px) { .brand-text { font-size: .9rem; } }
+  @media (max-width: 370px) { .menu-label { display: none; } .menu-toggle { padding: 0 11px; } .brand { gap: 8px; } }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px; border-radius: 999px; font-weight: 600; font-size: .95rem;
+    text-decoration: none; border: 1px solid transparent; cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-text); }
+  .btn-ghost { border-color: var(--line); color: var(--text); background: var(--surface); }
+  .btn-sm { padding: 8px 14px; font-size: .85rem; }
+  .btn:hover { filter: brightness(1.05); }
+  .btn:disabled { opacity: .45; cursor: default; filter: none; }
+
+  /* Hero */
+  .hero { padding: 88px 0 72px; border-top: 0; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+  .hero-meta { display: flex; gap: 24px; margin-top: 32px; font-size: .9rem; color: var(--muted); flex-wrap: wrap; }
+  .hero-meta b { color: var(--text); display: block; font-size: 1.2rem; }
+
+  .hero-box {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  .hero-box svg { width: 100%; height: auto; display: block; }
+
+  /* Cards */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .grid-3, .grid-2 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 601px) and (max-width: 860px) { .grid-3 > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
+  @media (max-width: 600px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .hero-box { max-width: 520px; width: 100%; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  .card p:last-child { margin-bottom: 0; }
+  .icon { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 14px; font-weight: 700; }
+  .icon svg { width: 20px; height: 20px; }
+
+  .two-col > *, .grid-2 > *, .grid-3 > *, .demo-out > *, .hero-grid > *, .m-panel > * { min-width: 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; gap: 24px; } }
+
+  blockquote {
+    margin: 0; padding: 20px 24px; border-left: 3px solid var(--accent);
+    background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0;
+    font-family: Fraunces, Georgia, serif; font-size: 1.15rem;
+  }
+  blockquote footer { font-family: Inter, sans-serif; font-size: .85rem; color: var(--muted); margin-top: 10px; }
+
+  /* Glossary */
+  dl.terms { margin: 0; display: grid; gap: 14px; }
+  dl.terms div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
+  dl.terms dt { font-weight: 600; }
+  dl.terms dd { margin: 4px 0 0; color: var(--muted); font-size: .95rem; }
+
+  /* Steps */
+  ol.steps { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 16px; counter-reset: step; }
+  ol.steps li {
+    counter-increment: step; display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px;
+  }
+  ol.steps li::before {
+    content: counter(step); font-family: Fraunces, Georgia, serif; font-size: 1.6rem; font-weight: 700;
+    width: 48px; height: 48px; border-radius: 12px; background: var(--accent-soft); color: var(--accent);
+    display: grid; place-items: center;
+  }
+  ol.steps h3 { margin-bottom: .3em; }
+  ol.steps p { margin: 0; color: var(--muted); }
+  ol.steps .tip { margin-top: 10px; font-size: .9rem; color: var(--text); }
+  ol.steps .tip b { color: var(--accent); }
+  @media (max-width: 560px) { ol.steps li { grid-template-columns: 1fr; gap: 10px; } }
+
+  /* Aufteilungen */
+  .layout-card .mx-mini { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px; margin-bottom: 14px; }
+  .layout-card .ex { font-size: .85rem; background: var(--surface-2); border-radius: 8px; padding: 8px 12px; margin-top: 12px; }
+  .layout-card .ex b { display: block; font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+  /* Matrix-Zeichnung */
+  .mx svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .mx text { font-family: Inter, system-ui, sans-serif; }
+  .mx .ax { font-size: 12px; font-weight: 600; fill: var(--text); }
+  .mx .pole { font-size: 11px; fill: var(--muted); }
+  .mx .tick { font-size: 10px; fill: var(--muted); }
+  .mx .frame { fill: none; stroke: var(--line); }
+  .mx .split { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 4; opacity: .7; }
+  .mx .rg { fill: var(--c-bg); stroke: var(--c-line); }
+  .mx .rg-strong { fill: var(--c-strong); stroke: var(--surface); stroke-width: 2; }
+  .mx .rl { font-size: 12.5px; font-weight: 700; fill: var(--c); }
+  .mx .rh { font-size: 10.5px; fill: var(--muted); }
+  .mx-mini .rl { font-size: 10.5px; }
+  .mx .cs { font-size: 10px; fill: var(--c); opacity: .75; font-weight: 600; }
+  .mx .pt circle.dot { fill: var(--c-bg); stroke: var(--c); stroke-width: 2; }
+  .mx .pt text.no { font-size: 10.5px; font-weight: 700; fill: var(--c); }
+  .mx .pt text.nm { font-size: 11px; font-weight: 500; fill: var(--text); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+  .mx .pt.sel circle.ring { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+  .mx .pt.hl circle.ring { fill: none; stroke: var(--warn); stroke-width: 2.5; stroke-dasharray: 3 2; }
+  .mx .card-it rect.cbox { fill: var(--surface); stroke: var(--c-line); }
+  .mx .card-it.sel rect.cbox { stroke: var(--accent); stroke-width: 2; }
+  .mx .card-it.hl rect.cbox { stroke: var(--warn); stroke-width: 2; stroke-dasharray: 3 2; }
+  .mx .card-it text.ct { font-size: 11.5px; fill: var(--text); }
+  .mx .card-it.done text.ct { fill: var(--muted); text-decoration: line-through; }
+  .mx .card-it text.cm { font-size: 10px; fill: var(--muted); }
+  .mx .card-it text.cm.late { fill: var(--bad); font-weight: 700; }
+  .mx .card-it circle.av { fill: var(--accent-soft); }
+  .mx .card-it text.avt { font-size: 9px; font-weight: 700; fill: var(--accent); }
+  .mx .more { font-size: 10.5px; fill: var(--muted); }
+  .mx.interactive .pt, .mx.interactive .card-it { cursor: grab; }
+  .mx.interactive svg { touch-action: none; user-select: none; -webkit-user-select: none; }
+  .mx.interactive svg:focus { outline: none; }
+  .mx.interactive svg:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+
+  /* Hero matrix */
+  .h-q { stroke: var(--surface); stroke-width: 3; }
+
+  /* Methoden-Reiter */
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 28px 0 20px; }
+  .tab {
+    display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--text); font: 600 .9rem Inter, sans-serif; cursor: pointer;
+  }
+  .tab .ti { width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; background: var(--c-bg); color: var(--c); font-size: .8rem; }
+  .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+  .tab[aria-selected="true"] .ti { background: color-mix(in srgb, var(--accent-text) 22%, transparent); color: var(--accent-text); }
+  @media (max-width: 640px) {
+    .tabs { flex-wrap: nowrap; overflow-x: auto; margin-left: -16px; margin-right: -16px; padding: 0 16px 6px; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab { flex-shrink: 0; }
+  }
+  .m-panel { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; align-items: start; }
+  .m-panel[hidden] { display: none; }
+  @media (max-width: 860px) { .m-panel { grid-template-columns: 1fr; } }
+  .m-panel .aka { font-size: .85rem; color: var(--muted); margin: -4px 0 14px; }
+  .m-panel h4 { font: 600 .75rem Inter, sans-serif; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 20px 0 8px; }
+  .axes { display: grid; gap: 6px; font-size: .92rem; }
+  .axes div { display: grid; grid-template-columns: 26px 1fr; gap: 6px; align-items: baseline; }
+  .axes b { font: 700 .8rem Inter, sans-serif; background: var(--surface-2); border-radius: 6px; text-align: center; padding: 1px 0; }
+  .regions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 420px) { .regions { grid-template-columns: 1fr; } }
+  .region { background: var(--c-bg); border: 1px solid var(--c-line); border-left: 4px solid var(--c); border-radius: 9px; padding: 8px 12px; font-size: .88rem; }
+  .region b { display: block; color: var(--c); }
+  .region span { color: var(--muted); font-size: .82rem; }
+  ul.plain { margin: 0; padding-left: 1.2em; font-size: .92rem; }
+  ul.plain li { margin-bottom: .35em; }
+  .chiprow { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { font-size: .8rem; padding: 3px 10px; border-radius: 999px; background: var(--surface-2); color: var(--text); }
+  .m-side .mx-prev { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px 12px 4px; }
+  .m-side .ex { font-size: .88rem; background: var(--surface-2); border-radius: 10px; padding: 12px 14px; margin-top: 14px; }
+  .m-side .ex b { display: block; font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
+  .m-side .btn { margin-top: 14px; }
+
+  /* Auswahlhilfe */
+  table.pick { width: 100%; border-collapse: collapse; font-size: .92rem; background: var(--surface); }
+  table.pick th, table.pick td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  table.pick thead th { background: var(--surface-2); font-weight: 600; }
+  table.pick tr:last-child td { border-bottom: 0; }
+  table.pick td:first-child { font-family: Fraunces, Georgia, serif; font-size: 1rem; }
+  .pick-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); -webkit-overflow-scrolling: touch; }
+  .mtag { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; white-space: nowrap; color: var(--c); }
+  .mtag i { font-style: normal; width: 20px; height: 20px; border-radius: 6px; background: var(--c-bg); display: grid; place-items: center; font-size: .75rem; }
+  @media (max-width: 640px) {
+    table.pick { min-width: 560px; font-size: .86rem; }
+    .scroll-hint { display: block !important; }
+  }
+  .scroll-hint { display: none; font-size: .8rem; color: var(--muted); margin: 0 0 8px; }
+
+  /* Werkstatt */
+  .demo-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 4px; }
+  .demo-tools { display: flex; gap: 10px; flex-wrap: wrap; }
+  .demo-out { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 900px) { .demo-out { grid-template-columns: 1fr; } }
+  .ws-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .ws-bar h3 { margin: 0; }
+  .ws-bar label { font-size: .85rem; color: var(--muted); display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+  .ws-bar input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
+  .inbox { border: 1px dashed var(--line); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; background: var(--bg); }
+  .inbox.drop { border-color: var(--accent); background: var(--accent-soft); }
+  .inbox-head { display: flex; justify-content: space-between; gap: 10px; font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; margin-bottom: 8px; }
+  .inbox-head span:last-child { text-transform: none; letter-spacing: 0; font-weight: 400; }
+  .inbox-items { display: flex; gap: 6px; flex-wrap: wrap; min-height: 32px; align-items: center; }
+  .inbox-items .empty { font-size: .85rem; color: var(--muted); }
+  .ichip {
+    font: 500 .85rem Inter, sans-serif; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--text); cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+  }
+  .ichip b { color: var(--muted); font-weight: 600; margin-right: 4px; }
+  .ichip.sel { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+  .ichip.hl { border-color: var(--warn); border-style: dashed; }
+  .add-row { display: flex; gap: 8px; margin-top: 12px; }
+  .add-row input { flex: 1; min-width: 0; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 10px; font-size: .82rem; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 12px; height: 12px; border-radius: 4px; background: var(--c-strong); border: 1px solid var(--c); display: inline-block; }
+  .legend b { color: var(--text); font-weight: 600; }
+  .kbd-hint { font-size: .8rem; color: var(--muted); margin: 10px 0 0; }
+  kbd { font: 600 .75rem ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--surface-2); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; }
+
+  .field label, .field .label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 4px; }
+  .field small { font-weight: 400; color: var(--muted); }
+  input[type="text"], input[type="date"], select {
+    width: 100%; padding: 9px 12px; border-radius: 9px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--text); font: inherit; font-size: .92rem;
+  }
+  input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  input[type="range"] { width: 100%; accent-color: var(--accent); margin: 2px 0 0; }
+  .ed { display: grid; gap: 12px; }
+  .ed-empty { font-size: .92rem; color: var(--muted); background: var(--surface-2); border-radius: 10px; padding: 12px 14px; }
+  .ed-head { display: flex; align-items: center; gap: 10px; }
+  .ed-no { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font: 700 .85rem Fraunces, Georgia, serif; background: var(--c-bg); color: var(--c); border: 1px solid var(--c-line); flex-shrink: 0; }
+  .ed-head input { font-weight: 600; }
+  .ed-region { border-radius: 10px; padding: 9px 12px; background: var(--c-bg); border: 1px solid var(--c-line); font-size: .88rem; }
+  .ed-region b { color: var(--c); }
+  .ed-region span { color: var(--muted); }
+  .ed-region.none { --c: var(--muted); --c-bg: var(--surface-2); --c-line: var(--line); }
+  .range-row .label { display: flex; justify-content: space-between; gap: 8px; }
+  .range-row .label output { font-variant-numeric: tabular-nums; color: var(--accent); }
+  .range-row .poles { display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); }
+  .rbtns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .rbtns button { text-align: left; padding: 7px 10px; border-radius: 9px; border: 1px solid var(--c-line); background: var(--c-bg); color: var(--c); font: 600 .82rem Inter, sans-serif; cursor: pointer; }
+  .rbtns button[aria-pressed="true"] { outline: 2px solid var(--c); outline-offset: 1px; }
+  .q-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; font-size: .86rem; }
+  .q-row small { display: block; color: var(--muted); font-size: .75rem; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+  .seg button { width: 30px; height: 30px; border: 0; border-left: 1px solid var(--line); background: var(--bg); color: var(--text); font: 600 .82rem Inter, sans-serif; cursor: pointer; }
+  .seg button:first-child { border-left: 0; }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+  .check-line { display: flex; gap: 10px; align-items: center; font-size: .92rem; cursor: pointer; }
+  .check-line input { width: 18px; height: 18px; accent-color: var(--accent); margin: 0; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 420px) { .row-2 { grid-template-columns: 1fr; } }
+  .row-tools { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .out-block + .out-block { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--line); }
+  .out-block h3 { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; font-size: 1.02rem; }
+  .out-block h3 small { font: 500 .8rem Inter, sans-serif; color: var(--muted); }
+  ul.hints { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .9rem; }
+  ul.hints li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; }
+  ul.hints .sym { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; font-size: .75rem; font-weight: 700; background: var(--surface-2); color: var(--muted); }
+  ul.hints .ok .sym { background: var(--ok-soft); color: var(--ok); }
+  ul.hints .warn .sym { background: var(--warn-soft); color: var(--warn); }
+  ul.hints .bad .sym { background: var(--bad-soft); color: var(--bad); }
+  ul.hints b { font-weight: 600; }
+  ul.hints button.hint { all: unset; cursor: pointer; display: block; border-radius: 6px; }
+  ul.hints button.hint:hover b, ul.hints button.hint:focus-visible b { text-decoration: underline; }
+  ul.hints button.hint:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  ul.hints li.on .sym { outline: 2px solid var(--warn); }
+  ol.rank { margin: 0; padding-left: 1.4em; font-size: .9rem; display: grid; gap: 4px; }
+  ol.rank li span { color: var(--muted); font-variant-numeric: tabular-nums; }
+  ul.lq { margin: 0; padding-left: 1.2em; font-size: .9rem; color: var(--muted); }
+  ul.lq li { margin-bottom: .3em; }
+
+  /* Skalen */
+  table.scale { width: 100%; border-collapse: collapse; font-size: .88rem; background: var(--surface); }
+  table.scale th, table.scale td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  table.scale thead th { background: var(--surface-2); font-weight: 600; }
+  table.scale tr:last-child td { border-bottom: 0; }
+  table.scale td:first-child { font: 700 1rem Fraunces, Georgia, serif; color: var(--accent); width: 40px; text-align: center; }
+  .scale-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+  .vs { display: grid; gap: 8px; margin-top: 12px; }
+  .vs div { display: grid; grid-template-columns: 26px 1fr; gap: 6px; font-size: .92rem; padding: 8px 12px; border-radius: 9px; }
+  .vs .no { background: var(--warn-soft); color: var(--warn); }
+  .vs .yes { background: var(--ok-soft); color: var(--ok); }
+  .vs small { display: block; opacity: .85; font-size: .82rem; }
+
+  /* Weitere Matrizen */
+  .more-m h3 { margin-bottom: .2em; }
+  .more-m .axes-s { font-size: .82rem; color: var(--muted); margin-bottom: 10px; }
+  .more-m .q4 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: .8rem; }
+  .more-m .q4 span { background: var(--surface-2); border-radius: 6px; padding: 4px 8px; }
+  .more-m .how { margin-top: 10px; font-size: .82rem; color: var(--muted); }
+
+  ul.checklist { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; font-size: .95rem; }
+  ul.checklist li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; }
+  ul.checklist li::before { content: '☐'; color: var(--accent); }
+
+  /* Do / Don't */
+  .dd h3 { display: flex; align-items: center; gap: 8px; }
+  .dd ul { margin: 0; padding-left: 1.2em; }
+  .dd li { margin-bottom: .5em; }
+  .dd.do h3 { color: var(--ok); }
+  .dd.dont h3 { color: var(--warn); }
+
+  /* Quiz */
+  .quiz { display: grid; gap: 16px; }
+  .quiz .qz { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; }
+  .quiz .qz p { font-weight: 600; }
+  .quiz .opts { display: grid; gap: 8px; }
+  .quiz button {
+    text-align: left; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--text); font: inherit; cursor: pointer;
+  }
+  .quiz button:hover:not(:disabled) { border-color: var(--accent); }
+  .quiz button.right { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+  .quiz button.wrong { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
+  .quiz .why { margin-top: 12px; font-size: .9rem; color: var(--muted); display: none; }
+  .quiz .qz.done .why { display: block; }
+
+  /* CTA */
+  .cta { background: var(--accent); color: var(--accent-text); border-radius: 20px; padding: 48px 40px; display: grid; grid-template-columns: 1.4fr auto; gap: 24px; align-items: center; }
+  .cta p { opacity: .9; margin: 0; }
+  .cta .btn { background: var(--accent-text); color: var(--accent); }
+  @media (max-width: 760px) { .cta { grid-template-columns: 1fr; padding: 32px 24px; } }
+
+  footer.site { padding: 40px 0 56px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); }
+  footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 640px) {
+    section { padding: 48px 0; }
+    .hero { padding: 40px 0 48px; }
+    .hero-grid { gap: 32px; }
+    .lead { font-size: 1.05rem; }
+    .hero .actions .btn, .demo-tools .btn { flex: 1 1 auto; justify-content: center; }
+    .demo-tools { width: 100%; }
+    .card { padding: 20px; }
+    .demo-out .card { padding: 14px; }
+    ol.steps li { padding: 18px 20px; }
+    ol.steps li::before { width: 40px; height: 40px; font-size: 1.3rem; }
+    .cta .btn { justify-content: center; }
+  }
+  .theme-toggle { margin-left: 8px; background: none; border: 1px solid var(--line); color: var(--text); border-radius: 999px; width: 34px; height: 34px; cursor: pointer; display: grid; place-items: center; flex-shrink: 0; }
+  @media (max-width: 960px) { .theme-toggle { margin-left: auto; } }
+  @media (hover: none) { .quiz button:hover:not(:disabled) { border-color: var(--line); } }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Hauptnavigation">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="currentColor"/>
+        <path d="M8.5 6.5V23.5H25.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="14" cy="13.5" r="2.7" fill="#fff"/>
+        <circle cx="20.5" cy="18" r="2.7" fill="#fff"/>
+        <circle cx="21.5" cy="9.5" r="2.1" fill="#fb923c"/>
+      </svg>
+      <span class="brand-text">2-Achsen-Matrix</span>
+    </a>
+    <ul id="navMenu">
+      <li><a href="#grundidee">Grundidee</a></li>
+      <li><a href="#vorgehen">Vorgehen</a></li>
+      <li><a href="#methoden">Methoden</a></li>
+      <li><a href="#auswahl">Auswahl</a></li>
+      <li><a href="#werkstatt">Werkstatt</a></li>
+      <li><a href="#achsen">Gute Achsen</a></li>
+      <li><a href="#anpassen">Anpassen</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Hell/Dunkel umschalten" title="Hell/Dunkel umschalten"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Menü öffnen"><span aria-hidden="true">☰</span> <span class="menu-label">Menü</span></button>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Kurzschulung · Priorisieren &amp; Entscheiden</span>
+        <h1>Zwei Achsen, klare Prioritäten</h1>
+        <p class="lead">Aufgaben, Ideen, Stakeholder, Risiken oder Vorhaben nach zwei Kriterien einordnen – und auf einen Blick sehen, was zu tun ist. In 20 Minuten lernst du die fünf gängigsten 2-Achsen-Methoden kennen, wählst die passende aus und ordnest sauber und begründet ein.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#grundidee">Schulung starten ↓</a>
+          <a class="btn btn-ghost" href="https://method-commons.github.io/two-axis-matrix-app/" target="_blank" rel="noopener">Zur Matrix-App ↗</a>
+        </div>
+        <div class="hero-meta">
+          <div><b>5</b>Methoden</div>
+          <div><b>~20 min</b>Lesezeit</div>
+          <div><b>1</b>Matrix-Werkstatt</div>
+        </div>
+      </div>
+      <div class="hero-box" aria-hidden="true">
+        <svg viewBox="0 0 420 300">
+          <style>
+            .h-ax { stroke: var(--text); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+            .h-lb { font: 600 11px Inter, sans-serif; fill: var(--text); }
+            .h-rl { font: 700 12px Inter, sans-serif; fill: var(--c); }
+            .h-rh { font: 500 10px Inter, sans-serif; fill: var(--muted); }
+            .h-dot { fill: var(--c-bg); stroke: var(--c); stroke-width: 2; }
+            .h-no { font: 700 10px Inter, sans-serif; fill: var(--c); }
+            .h-mv { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 4 3; fill: none; }
+            .h-sm { font: 500 10px Inter, sans-serif; fill: var(--muted); }
+          </style>
+          <g class="c-green"><rect class="h-q" x="40" y="10" width="180" height="120" rx="10" fill="var(--c-bg)"/><text class="h-rl" x="52" y="30">Quick Wins</text><text class="h-rh" x="52" y="44">zuerst umsetzen</text></g>
+          <g class="c-blue"><rect class="h-q" x="220" y="10" width="180" height="120" rx="10" fill="var(--c-bg)"/><text class="h-rl" x="388" y="30" text-anchor="end">Großprojekte</text><text class="h-rh" x="388" y="44" text-anchor="end">sorgfältig planen</text></g>
+          <g class="c-gray"><rect class="h-q" x="40" y="130" width="180" height="120" rx="10" fill="var(--c-bg)"/><text class="h-rl" x="52" y="238">Lückenfüller</text><text class="h-rh" x="52" y="224">nebenbei</text></g>
+          <g class="c-red"><rect class="h-q" x="220" y="130" width="180" height="120" rx="10" fill="var(--c-bg)"/><text class="h-rl" x="388" y="238" text-anchor="end">Zeitfresser</text><text class="h-rh" x="388" y="224" text-anchor="end">streichen</text></g>
+          <path class="h-ax" d="M40 8V250H404"/>
+          <path class="h-ax" d="M35 15L40 8L45 15M397 245L404 250L397 255"/>
+          <text class="h-lb" x="222" y="270" text-anchor="middle">Aufwand →</text>
+          <text class="h-lb" transform="translate(24 130) rotate(-90)" text-anchor="middle">Wert →</text>
+          <g class="c-green"><circle class="h-dot" cx="88" cy="74" r="11"/><text class="h-no" x="88" y="78" text-anchor="middle">1</text></g>
+          <g class="c-green"><circle class="h-dot" cx="150" cy="58" r="11"/><text class="h-no" x="150" y="62" text-anchor="middle">2</text></g>
+          <g class="c-blue"><circle class="h-dot" cx="300" cy="66" r="11"/><text class="h-no" x="300" y="70" text-anchor="middle">3</text></g>
+          <g class="c-gray"><circle class="h-dot" cx="120" cy="190" r="11"/><text class="h-no" x="120" y="194" text-anchor="middle">4</text></g>
+          <g class="c-red"><circle class="h-dot" cx="340" cy="200" r="11"/><text class="h-no" x="340" y="204" text-anchor="middle">5</text></g>
+          <g class="c-blue"><circle cx="262" cy="150" r="11" fill="none" stroke="var(--c)" stroke-width="1.6" stroke-dasharray="3 2" opacity=".7"/></g>
+          <path class="h-mv" d="M254 143L172 104"/>
+          <g class="c-green"><circle class="h-dot" cx="166" cy="100" r="11"/><text class="h-no" x="166" y="104" text-anchor="middle">6</text></g>
+          <text class="h-sm" x="210" y="292" text-anchor="middle">Einträge einordnen · Bereich zeigt das Vorgehen · Rangfolge</text>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <!-- GRUNDIDEE -->
+  <section id="grundidee">
+    <div class="wrap">
+      <span class="eyebrow">01 · Grundidee</span>
+      <div class="two-col">
+        <div>
+          <h2>Zwei Fragen statt einer langen Liste</h2>
+          <p>Eine lange Liste lässt sich schwer ordnen – nach welchem Kriterium auch? Eine <strong>2-Achsen-Matrix</strong> stellt zu jedem Eintrag <strong>zwei Fragen</strong>, etwa „Wie wichtig?“ und „Wie dringend?“ oder „Wie wertvoll?“ und „Wie aufwendig?“. Jede Antwort ist eine Position auf einer Achse, zusammen ein Punkt in der Fläche.</p>
+          <p>Die Fläche ist in <strong>Bereiche</strong> geteilt, und jeder Bereich hat eine klare Konsequenz: <em>sofort erledigen</em>, <em>eng einbinden</em>, <em>Maßnahme festlegen</em>, <em>iterativ vorgehen</em>. Die Matrix macht so aus einer Bewertung eine Entscheidung – nachvollziehbar und im Team besprechbar.</p>
+          <blockquote>
+            „Ich habe zwei Arten von Problemen: die dringenden und die wichtigen. Die dringenden sind nicht wichtig, und die wichtigen sind nie dringend.“
+            <footer>— sinngemäß nach Dwight D. Eisenhower, 1954</footer>
+          </blockquote>
+        </div>
+        <div>
+          <h3 style="margin-bottom:14px">Die wichtigsten Begriffe</h3>
+          <dl class="terms">
+            <div><dt>Achse</dt><dd>Ein Kriterium mit zwei Polen („gering“ … „hoch“) und einer Skala – mit Stufen (1–5) oder stufenlos.</dd></div>
+            <div><dt>Bereich</dt><dd>Teil der Fläche mit Namen, Farbe und Hinweis zum Vorgehen: ein Feld, eine Stufe im Raster oder eine Zone.</dd></div>
+            <div><dt>Trennlinie</dt><dd>Grenze zwischen Feldern. Wer genau auf der Linie liegt, zählt zu „hoch“ – und verdient einen zweiten Blick.</dd></div>
+            <div><dt>Eintrag</dt><dd>Das, was eingeordnet wird – Aufgabe, Idee, Stakeholder, Risiko, Vorhaben. Mit Notiz und Feldern je Methode.</dd></div>
+            <div><dt>Eingang</dt><dd>Sammelstelle für neue, noch nicht eingeordnete Einträge: erst sammeln, dann einordnen.</dd></div>
+            <div><dt>Rangfolge</dt><dd>Reihenfolge aus den beiden Werten – Wert ÷ Aufwand oder Wahrscheinlichkeit × Auswirkung.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <h3 style="margin-top:48px">Drei Arten, die Fläche aufzuteilen</h3>
+      <p class="muted" style="max-width:68ch">Alle Methoden der App beruhen auf einer von drei Aufteilungen. Wer sie kennt, kann jede bekannte 2-Achsen-Methode einordnen – und eigene bauen.</p>
+      <div class="grid-3" style="margin-top:20px">
+        <div class="card layout-card">
+          <div class="mx mx-mini" data-mini="value-effort"></div>
+          <h3>Vier Felder</h3>
+          <p class="muted small">Zwei Trennlinien teilen die Fläche in vier Quadranten. Der Bereich ergibt sich daraus, ob ein Eintrag links/rechts und oben/unten der Linien liegt.</p>
+          <div class="ex"><b>Methoden</b>Eisenhower, Wert/Aufwand, Macht/Interesse</div>
+        </div>
+        <div class="card layout-card">
+          <div class="mx mx-mini" data-mini="risk"></div>
+          <h3>Raster mit Stufen</h3>
+          <p class="muted small">Jede Zelle hat einen Wert X × Y. Stufen legen fest, ab welchem Wert eine Zelle „mittel“, „hoch“ oder „sehr hoch“ ist.</p>
+          <div class="ex"><b>Methoden</b>Risikomatrix, Priorität = Häufigkeit × Schwere</div>
+        </div>
+        <div class="card layout-card">
+          <div class="mx mx-mini" data-mini="stacey"></div>
+          <h3>Zonen</h3>
+          <p class="muted small">Ringe um den Ursprung: Entscheidend ist der Abstand von „alles klar und bekannt“. Je weiter außen, desto unsicherer.</p>
+          <div class="ex"><b>Methoden</b>Stacey-Matrix, Cynefin-ähnliche Einordnungen</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VORGEHEN -->
+  <section id="vorgehen">
+    <div class="wrap">
+      <span class="eyebrow">02 · Vorgehen</span>
+      <h2>In fünf Schritten von der Liste zur Entscheidung</h2>
+      <p class="lead">Egal welche Methode: Der Ablauf ist immer gleich. Die meiste Qualität entsteht in Schritt 2 – wenn alle dasselbe unter „hoch“ verstehen.</p>
+      <ol class="steps">
+        <li><div><h3>Frage klären und Methode wählen</h3><p>Was soll entschieden werden – was zuerst tun, wen einbinden, wogegen absichern, wie vorgehen? Daraus folgt die Methode und damit die beiden Achsen.</p><p class="tip"><b>In der App:</b> „Neue Matrix“ – Methode wählen, Vorschau mit Achsen, Skala und Bereichen.</p></div></li>
+        <li><div><h3>Achsen verankern</h3><p>Für jede Achse beschreiben, woran man „gering“ und „hoch“ erkennt – am besten mit Beispielen je Stufe. Ohne diese Verankerung meint jede Person etwas anderes.</p><p class="tip"><b>In der App:</b> „Achsen &amp; Bereiche“ – Name, Pole, Skala, Schritte und Richtung je Achse.</p></div></li>
+        <li><div><h3>Einträge sammeln</h3><p>Erst alles erfassen, ohne zu bewerten: Aufgaben, Ideen, Beteiligte, Risiken. Wer beim Sammeln schon sortiert, vergisst die Hälfte.</p><p class="tip"><b>In der App:</b> Neue Einträge landen mit Enter im <em>Eingang</em>.</p></div></li>
+        <li><div><h3>Einordnen – relativ und begründet</h3><p>Einträge in die Fläche ziehen und untereinander vergleichen: Ist A wichtiger als B? Eine kurze Begründung je Eintrag macht die Position nachvollziehbar.</p><p class="tip"><b>In der App:</b> Ziehen mit Maus, Stift oder Finger; Pfeiltasten verschieben, Taste 1–9 legt in einen Bereich.</p></div></li>
+        <li><div><h3>Ableiten und handeln</h3><p>Jeder Bereich hat ein Vorgehen. Hinweise, Rangfolge und Leitfragen zeigen, was noch fehlt: delegiert ohne Person, hohes Risiko ohne Maßnahme, kritischer Stakeholder mit viel Einfluss.</p><p class="tip"><b>In der App:</b> Seitenleiste mit Hinweisen und Rangfolge, Bericht als PDF, Bild, Markdown, CSV oder JSON.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- METHODEN -->
+  <section id="methoden">
+    <div class="wrap">
+      <span class="eyebrow">03 · Methoden</span>
+      <h2>Fünf Vorlagen – und eine eigene</h2>
+      <p class="lead">Jede Methode ist in der App eine Vorlage: Achsen, Bereiche, Felder je Eintrag und eigene Hinweise. Alles lässt sich später je Matrix anpassen.</p>
+
+      <div class="tabs" role="tablist" aria-label="Methoden">
+        <button class="tab c-red" role="tab" id="tab-eisenhower" aria-controls="p-eisenhower" aria-selected="true" data-tab="eisenhower"><span class="ti" aria-hidden="true">⏱</span>Eisenhower</button>
+        <button class="tab c-green" role="tab" id="tab-value-effort" aria-controls="p-value-effort" aria-selected="false" tabindex="-1" data-tab="value-effort"><span class="ti" aria-hidden="true">◆</span>Wert/Aufwand</button>
+        <button class="tab c-orange" role="tab" id="tab-stakeholder" aria-controls="p-stakeholder" aria-selected="false" tabindex="-1" data-tab="stakeholder"><span class="ti" aria-hidden="true">◎</span>Macht/Interesse</button>
+        <button class="tab c-orange" role="tab" id="tab-risk" aria-controls="p-risk" aria-selected="false" tabindex="-1" data-tab="risk"><span class="ti" aria-hidden="true">▦</span>Risikomatrix</button>
+        <button class="tab c-violet" role="tab" id="tab-stacey" aria-controls="p-stacey" aria-selected="false" tabindex="-1" data-tab="stacey"><span class="ti" aria-hidden="true">◠</span>Stacey</button>
+        <button class="tab c-gray" role="tab" id="tab-custom" aria-controls="p-custom" aria-selected="false" tabindex="-1" data-tab="custom"><span class="ti" aria-hidden="true">✳</span>Eigene</button>
+      </div>
+
+      <!-- Eisenhower -->
+      <div class="card m-panel" role="tabpanel" id="p-eisenhower" aria-labelledby="tab-eisenhower">
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">Eisenhower-Matrix</h3>
+          <p class="aka">auch: Dringend/Wichtig-Matrix, Zeitmanagement-Matrix</p>
+          <p>Trennt <strong>Wichtiges</strong> von <strong>Dringendem</strong>. Wichtig ist, was auf ein Ziel einzahlt; dringend ist, was einen nahen Termin hat oder bei Aufschub Folgen hat. Der wertvollste Quadrant ist „Einplanen“: Wer dort Zeit blockt, hat später weniger in „Sofort erledigen“.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Dringlichkeit: nicht dringend → dringend (gezeichnet umgekehrt: „dringend“ steht wie üblich links)</span></div><div><b>Y</b><span>Wichtigkeit: nicht wichtig → wichtig</span></div></div>
+          <h4>Bereiche</h4>
+          <div class="regions">
+            <div class="region c-red"><b>Sofort erledigen</b><span>wichtig &amp; dringend – selbst, jetzt</span></div>
+            <div class="region c-green"><b>Einplanen</b><span>wichtig, nicht dringend – Zeit blocken</span></div>
+            <div class="region c-orange"><b>Delegieren</b><span>dringend, nicht wichtig – abgeben</span></div>
+            <div class="region c-gray"><b>Weglassen</b><span>weder noch – streichen oder später</span></div>
+          </div>
+          <h4>Je Aufgabe</h4>
+          <div class="chiprow"><span class="tag">Wer</span><span class="tag">Termin (überschrittene rot)</span><span class="tag">Erledigt</span><span class="tag">Notiz</span></div>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Delegieren ohne Person · Einplanen ohne Termin</li>
+            <li>Mehr „Sofort“ als „Einplanen“ – mehr vorausplanen</li>
+            <li>Offene Aufgaben in „Weglassen“ – wirklich weglassen</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="eisenhower"></div>
+          <div class="ex"><b>Leitfragen</b>Was passiert, wenn ich es diese Woche nicht tue? Zahlt es auf ein Ziel ein – oder nur auf jemandes Dringlichkeit? Wer kann es genauso gut (oder besser)?</div>
+          <div class="ex"><b>Beispiel in der App</b>„Wochenplanung KW 42“ des Food-Trucks: Fettfilter wechseln, Gasflaschen nachbestellen, Kalkulation Wintersaison …</div>
+          <button class="btn btn-ghost btn-sm" type="button" data-try="eisenhower">In der Werkstatt ausprobieren ↓</button>
+        </div>
+      </div>
+
+      <!-- Wert/Aufwand -->
+      <div class="card m-panel" role="tabpanel" id="p-value-effort" aria-labelledby="tab-value-effort" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">Wert / Aufwand</h3>
+          <p class="aka">auch: Nutzen-Aufwand-Matrix, Impact/Effort, Prioritäten-Matrix</p>
+          <p>Ordnet Ideen und Maßnahmen nach ihrem <strong>erwarteten Nutzen</strong> und dem <strong>nötigen Einsatz</strong>. Oben liegt das Wertvolle, links das Günstige – links oben also die Quick Wins. Die Werte sind Schätzungen: am besten im Team und mit kurzer Begründung je Idee.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Aufwand: gering → hoch (0–10, halbe Schritte)</span></div><div><b>Y</b><span>Wert / Nutzen: gering → hoch (0–10, halbe Schritte)</span></div></div>
+          <h4>Bereiche</h4>
+          <div class="regions">
+            <div class="region c-green"><b>Quick Wins</b><span>hoher Wert, wenig Aufwand – zuerst umsetzen</span></div>
+            <div class="region c-blue"><b>Großprojekte</b><span>hoher Wert, viel Aufwand – planen, in Schritte zerlegen</span></div>
+            <div class="region c-gray"><b>Lückenfüller</b><span>wenig Wert, wenig Aufwand – nebenbei</span></div>
+            <div class="region c-red"><b>Zeitfresser</b><span>wenig Wert, viel Aufwand – streichen</span></div>
+          </div>
+          <h4>Je Idee</h4>
+          <div class="chiprow"><span class="tag">Begründung</span><span class="tag">Rangfolge nach Wert ÷ Aufwand</span></div>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Mit Quick Wins beginnen – oder: keine Quick Wins? Kleinere Varianten suchen</li>
+            <li>Knapp an der Grenze (näher als 5 % der Achse) – Schätzung prüfen</li>
+            <li>Zeitfresser streichen</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="value-effort"></div>
+          <div class="ex"><b>Leitfragen</b>Was bringt am meisten für den geringsten Einsatz? Woran messen wir den Wert – Umsatz, Zufriedenheit, Zeitersparnis? Ist der Aufwand geschätzt oder geraten?</div>
+          <div class="ex"><b>Beispiel in der App</b>„Ideen Saison 2027“: Kombi-Angebot Mittag, Instagram-Tagesstandort, Firmen-Catering, zweiter Truck …</div>
+          <button class="btn btn-ghost btn-sm" type="button" data-try="value-effort">In der Werkstatt ausprobieren ↓</button>
+        </div>
+      </div>
+
+      <!-- Stakeholder -->
+      <div class="card m-panel" role="tabpanel" id="p-stakeholder" aria-labelledby="tab-stakeholder" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">Macht / Interesse</h3>
+          <p class="aka">auch: Stakeholder-Analyse, Einfluss-Interesse-Matrix, Power/Interest-Grid</p>
+          <p>Ordnet Stakeholder nach ihrem <strong>Einfluss</strong> auf das Vorhaben und ihrem <strong>Interesse</strong> daran. Daraus folgt, wie eng man sie einbindet. Die <strong>Haltung</strong> ergänzt das Bild: Kritische Stakeholder mit viel Einfluss brauchen zuerst Aufmerksamkeit. Eine <strong>Ziel-Position</strong> zeigt, wohin man jemanden bewegen will.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Interesse / Betroffenheit: gering → hoch (1–5)</span></div><div><b>Y</b><span>Macht / Einfluss: gering → hoch (1–5)</span></div></div>
+          <h4>Bereiche</h4>
+          <div class="regions">
+            <div class="region c-red"><b>Eng einbinden</b><span>Schlüsselpersonen – früh beteiligen, gemeinsam entscheiden</span></div>
+            <div class="region c-orange"><b>Zufriedenstellen</b><span>Anforderungen erfüllen, nicht mit Details belasten</span></div>
+            <div class="region c-blue"><b>Informieren</b><span>regelmäßig berichten, Fragen ernst nehmen</span></div>
+            <div class="region c-gray"><b>Beobachten</b><span>im Blick behalten, ob sich etwas ändert</span></div>
+          </div>
+          <h4>Je Stakeholder</h4>
+          <div class="chiprow"><span class="tag">Haltung (Farbe des Punkts)</span><span class="tag">Ziel-Haltung</span><span class="tag">Ziel-Position (Pfeil)</span><span class="tag">Strategie</span><span class="tag">Kommunikation</span><span class="tag">Ansprechperson</span><span class="tag">Anliegen / Befürchtung</span></div>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Kritisch mit viel Einfluss – zuerst ansprechen</li>
+            <li>Schlüsselpersonen ohne Strategie · Haltung offen</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="stakeholder"></div>
+          <div class="ex"><b>Leitfragen</b>Wer kann das Vorhaben stoppen oder beschleunigen? Wer ist betroffen, ohne gefragt zu werden? Was befürchtet jemand – und was würde ihn umstimmen?</div>
+          <div class="ex"><b>Beispiel in der App</b>„Standort Domplatz“: Ordnungsamt, Marktverwaltung, Anwohnerinitiative, Café am Dom …</div>
+          <button class="btn btn-ghost btn-sm" type="button" data-try="stakeholder">In der Werkstatt ausprobieren ↓</button>
+        </div>
+      </div>
+
+      <!-- Risiko -->
+      <div class="card m-panel" role="tabpanel" id="p-risk" aria-labelledby="tab-risk" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">Risikomatrix</h3>
+          <p class="aka">auch: Risikobewertung, Wahrscheinlichkeits-Auswirkungs-Matrix, Heatmap</p>
+          <p>Bewertet jedes Risiko mit zwei Zahlen: Wie <strong>wahrscheinlich</strong> tritt es ein, und wie schwer wiegt die <strong>Auswirkung</strong>? Das Produkt ergibt die Risikostufe. Für hohe Risiken wird eine Strategie gewählt und eine Maßnahme festgelegt; die Bewertung nach der Maßnahme zeigt das <strong>Restrisiko</strong>.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Auswirkung: unbedeutend → existenziell (1–5)</span></div><div><b>Y</b><span>Wahrscheinlichkeit: sehr selten → sehr wahrscheinlich (1–5)</span></div></div>
+          <h4>Stufen (Wahrscheinlichkeit × Auswirkung)</h4>
+          <div class="regions">
+            <div class="region c-green"><b>Niedrig · 1–4</b><span>beobachten</span></div>
+            <div class="region c-yellow"><b>Mittel · 5–9</b><span>Maßnahmen prüfen</span></div>
+            <div class="region c-orange"><b>Hoch · 10–14</b><span>Maßnahmen festlegen</span></div>
+            <div class="region c-red"><b>Sehr hoch · 15–25</b><span>sofort handeln</span></div>
+          </div>
+          <h4>Je Risiko</h4>
+          <div class="chiprow"><span class="tag">Strategie: vermeiden · vermindern · übertragen · akzeptieren</span><span class="tag">Maßnahme</span><span class="tag">Verantwortlich</span><span class="tag">Nach Maßnahme (gestrichelt)</span><span class="tag">Ursache / Folge</span></div>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Hohe Risiken ohne Maßnahme – oder: alle hohen Risiken abgedeckt</li>
+            <li>Restrisiko nicht bewertet · Maßnahme ohne Wirkung</li>
+            <li>Sehr hohes Risiko akzeptiert – bewusst entschieden?</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="risk"></div>
+          <div class="ex"><b>Leitfragen</b>Was kann schiefgehen – und woran merken wir es früh? Wie oft ist das schon passiert, bei uns oder anderen? Was kostet es, wenn es eintritt – Geld, Zeit, Ruf, Gesundheit?</div>
+          <div class="ex"><b>Beispiel in der App</b>„Stadtfest 2026 – Risiken“: Generator fällt aus, Unwetter, Personalausfall, Fettbrand am Stand …</div>
+          <button class="btn btn-ghost btn-sm" type="button" data-try="risk">In der Werkstatt ausprobieren ↓</button>
+        </div>
+      </div>
+
+      <!-- Stacey -->
+      <div class="card m-panel" role="tabpanel" id="p-stacey" aria-labelledby="tab-stacey" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">Stacey-Matrix</h3>
+          <p class="aka">auch: Stacey-Diagramm, Komplexitätsmatrix</p>
+          <p>Fragt zweierlei: Wie <strong>einig</strong> sind sich die Beteiligten über das <em>Was</em> (Anforderungen, Ziele)? Und wie <strong>gewiss</strong> ist das <em>Wie</em> (Technik, Lösungsweg)? Je weiter ein Vorhaben vom Ursprung entfernt liegt, desto unsicherer ist es – und aus der Zone folgt das Vorgehen.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Wie – Technologie / Lösungsweg: bekannt → unbekannt</span></div><div><b>Y</b><span>Was – Anforderungen: Einigkeit → keine Einigkeit</span></div></div>
+          <h4>Zonen</h4>
+          <div class="regions">
+            <div class="region c-green"><b>Einfach</b><span>bewährtes Vorgehen, Checkliste</span></div>
+            <div class="region c-blue"><b>Kompliziert</b><span>plangetrieben: analysieren, Fachleute fragen</span></div>
+            <div class="region c-violet"><b>Komplex</b><span>iterativ: kleine Schritte, Feedback, Prototypen</span></div>
+            <div class="region c-red"><b>Chaotisch</b><span>erst handeln und stabilisieren, dann Ziele klären</span></div>
+          </div>
+          <h4>Einordnen per Fragen</h4>
+          <p class="small muted" style="margin:0">Vier Aussagen je Vorhaben, 1 = trifft zu … 5 = trifft nicht zu: <em>Ziele und Anforderungen sind klar · Alle Beteiligten wollen dasselbe</em> (Y) und <em>Wir haben so etwas schon gemacht · Weg und Technik sind bekannt</em> (X). Der Mittelwert je Achse ergibt die Position; Ziehen überschreibt sie.</p>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Chaotische Vorhaben – zuerst Ziele klären und stabilisieren</li>
+            <li>Komplexe Vorhaben iterativ angehen · Ohne Fragen eingeordnet</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="stacey"></div>
+          <div class="ex"><b>Leitfragen</b>Wissen wir, was am Ende herauskommen soll – und sind sich alle einig? Haben wir so etwas schon einmal gemacht? Was lernen wir erst unterwegs?</div>
+          <div class="ex"><b>Beispiel in der App</b>„Vorhaben 2027“: Saisonkarte aktualisieren, Kassensystem wechseln, Vorbestell-App, Umbau auf E-Truck …</div>
+          <button class="btn btn-ghost btn-sm" type="button" data-try="stacey">In der Werkstatt ausprobieren ↓</button>
+        </div>
+      </div>
+
+      <!-- Eigene -->
+      <div class="card m-panel" role="tabpanel" id="p-custom" aria-labelledby="tab-custom" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">Eigene Matrix</h3>
+          <p class="aka">freie Achsen, z. B. BCG, Kraljic, Dringlichkeit/Auswirkung</p>
+          <p>Beginnt mit zwei freien Achsen von 0 bis 10 und vier neutralen Feldern (A–D). Unter „Achsen &amp; Bereiche“ legst du Beschriftungen, Skalen, Aufteilung, Darstellung, Farben und Felder je Eintrag selbst fest. Eine gelungene Einstellung speicherst du als <strong>eigene Vorlage</strong> für neue Matrizen.</p>
+          <h4>Einstellbar</h4>
+          <ul class="plain">
+            <li>Name, Beschreibung und Bezeichnung der Einträge („Produkt“, „Lieferant“ …)</li>
+            <li>Je Achse: Name, Pole, Skala, Schritte, Richtung</li>
+            <li>Aufteilung: vier Felder, Raster mit Stufen, Zonen – Darstellung als Karten, Punkte oder Zellen</li>
+            <li>Bereiche: Name, Hinweis, Farbe, Grenzen</li>
+            <li>Felder je Eintrag: Person, Termin, Erledigt, Text, Textfeld, Auswahl, zweite Position</li>
+            <li>Rangfolge: keine, Y ÷ X oder X × Y</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="custom"></div>
+          <div class="ex"><b>Leitfragen</b>Was genau messen die beiden Achsen – und woran erkennt man „hoch“? Was folgt für Einträge in jedem Feld?</div>
+          <a class="btn btn-ghost btn-sm" href="#anpassen">Beispiele für eigene Matrizen ↓</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUSWAHL -->
+  <section id="auswahl">
+    <div class="wrap">
+      <span class="eyebrow">04 · Auswahlhilfe</span>
+      <div class="two-col">
+        <div>
+          <h2>Welche Methode passt zu meiner Frage?</h2>
+          <p class="muted">Die Methode folgt aus der Frage, nicht aus dem Material. Dieselbe Liste kann mehrmals eingeordnet werden: Risiken erst bewerten, dann die Maßnahmen nach Wert und Aufwand priorisieren.</p>
+        </div>
+        <div class="card" style="padding:18px 22px">
+          <h3 style="margin-bottom:.3em">Faustregel</h3>
+          <p class="muted small" style="margin:0">Geht es um <strong>Zeit</strong> → Eisenhower. Um <strong>Nutzen</strong> → Wert/Aufwand. Um <strong>Menschen</strong> → Macht/Interesse. Um <strong>Gefahren</strong> → Risikomatrix. Um das <strong>Vorgehen</strong> → Stacey.</p>
+        </div>
+      </div>
+      <p class="scroll-hint" style="margin-top:24px">← Tabelle seitlich wischen →</p>
+      <div class="pick-wrap" style="margin-top:24px">
+        <table class="pick">
+          <thead><tr><th>Deine Frage</th><th>Methode</th><th>Was du einordnest</th><th>Ergebnis</th></tr></thead>
+          <tbody>
+            <tr><td>Was mache ich diese Woche zuerst?</td><td><span class="mtag c-red"><i>⏱</i>Eisenhower</span></td><td>Aufgaben</td><td>Tun, einplanen, delegieren, weglassen</td></tr>
+            <tr><td>Welche Ideen setzen wir um?</td><td><span class="mtag c-green"><i>◆</i>Wert/Aufwand</span></td><td>Ideen, Maßnahmen, Features</td><td>Rangfolge nach Wert ÷ Aufwand</td></tr>
+            <tr><td>Wen müssen wir wie einbinden?</td><td><span class="mtag c-orange"><i>◎</i>Macht/Interesse</span></td><td>Personen, Gruppen, Organisationen</td><td>Strategie und Kommunikation je Gruppe</td></tr>
+            <tr><td>Was kann schiefgehen – und was tun wir dagegen?</td><td><span class="mtag c-orange"><i>▦</i>Risikomatrix</span></td><td>Risiken</td><td>Risikostufen, Maßnahmen, Restrisiko</td></tr>
+            <tr><td>Planen wir das durch oder probieren wir in Schritten?</td><td><span class="mtag c-violet"><i>◠</i>Stacey</span></td><td>Vorhaben, Projekte</td><td>Vorgehen je Zone</td></tr>
+            <tr><td>Keine passt genau?</td><td><span class="mtag c-gray"><i>✳</i>Eigene</span></td><td>beliebig</td><td>eigene Achsen, Bereiche, Felder</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- WERKSTATT -->
+  <section id="werkstatt">
+    <div class="wrap">
+      <span class="eyebrow">05 · Interaktives Beispiel</span>
+      <div class="demo-head">
+        <div>
+          <h2>Matrix-Werkstatt: Selbst einordnen</h2>
+          <p class="lead" style="margin:0">Wähle eine Methode, zieh die Einträge des Food-Truck-Beispiels in der Fläche herum oder erfasse eigene. Bereiche, Rangfolge und Hinweise rechnen mit denselben Regeln wie die App.</p>
+        </div>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Methode der Werkstatt" id="wsTabs"></div>
+      <div class="demo-out">
+        <div class="card">
+          <div class="ws-bar">
+            <h3 id="wsTitle"></h3>
+            <label><input type="checkbox" id="wsNames" checked> Namen</label>
+          </div>
+          <div class="inbox" id="wsInbox" data-drop="inbox">
+            <div class="inbox-head"><span>Eingang</span><span id="wsInboxHint">hineinziehen oder auswählen und Taste 1–4</span></div>
+            <div class="inbox-items" id="wsInboxItems"></div>
+          </div>
+          <div class="mx interactive" id="wsMatrix"></div>
+          <div class="legend" id="wsLegend"></div>
+          <form class="add-row" id="wsAdd" autocomplete="off">
+            <label for="wsNew" class="visually-hidden" style="position:absolute;left:-9999px">Neuer Eintrag</label>
+            <input type="text" id="wsNew" placeholder="Neuer Eintrag … (Enter)">
+            <button class="btn btn-ghost btn-sm" type="submit">+ Eingang</button>
+          </form>
+          <p class="kbd-hint">Auswählen, dann <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> verschieben · <kbd>1</kbd>–<kbd>4</kbd> in einen Bereich · <kbd>0</kbd> in den Eingang · <kbd>Entf</kbd> löschen · <kbd>Esc</kbd> Auswahl aufheben</p>
+        </div>
+        <div class="card">
+          <div class="out-block">
+            <h3>Gewählter Eintrag</h3>
+            <div id="wsEditor"></div>
+          </div>
+          <div class="out-block">
+            <h3>Hinweise <small>anklicken markiert die Einträge</small></h3>
+            <ul class="hints" id="wsHints"></ul>
+          </div>
+          <div class="out-block" id="wsRankBlock">
+            <h3>Rangfolge <small id="wsRankBy"></small></h3>
+            <ol class="rank" id="wsRank"></ol>
+          </div>
+          <div class="out-block">
+            <h3>Leitfragen</h3>
+            <ul class="lq" id="wsLead"></ul>
+          </div>
+          <div class="row-tools" style="margin-top:18px"><button class="btn btn-ghost btn-sm" type="button" id="wsReset">Beispiel neu laden</button><button class="btn btn-ghost btn-sm" type="button" id="wsClear">Leeren</button></div>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:16px;font-size:.9rem">Vereinfacht: Die Werkstatt zeigt je Methode die wichtigsten Felder. In der App gibt es zusätzlich Ziel-Position und Ziel-Haltung bei Stakeholdern, die Bewertung nach Maßnahme bei Risiken, Liste und Bericht, Rückgängig, Export und das Anpassen von Achsen und Bereichen.</p>
+    </div>
+  </section>
+
+  <!-- ACHSEN -->
+  <section id="achsen">
+    <div class="wrap">
+      <span class="eyebrow">06 · Gute Achsen, sauberes Einordnen</span>
+      <h2>Die Matrix ist nur so gut wie ihre Achsen</h2>
+      <p class="lead">„Hoch“ ist kein Maßstab. Erst wenn alle dasselbe darunter verstehen, werden Positionen vergleichbar – und Diskussionen drehen sich um die Sache statt um Begriffe.</p>
+      <div class="two-col" style="margin-top:32px">
+        <div>
+          <h3>Skalen verankern</h3>
+          <p class="muted">Beschreibe je Stufe, woran man sie erkennt – mit Zahlen oder Beispielen aus dem eigenen Umfeld. Beispiel für die Risikomatrix des Food-Trucks:</p>
+          <div class="scale-wrap">
+            <table class="scale">
+              <thead><tr><th></th><th>Wahrscheinlichkeit</th><th>Auswirkung</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>sehr selten – noch nie erlebt</td><td>unbedeutend – kaum spürbar</td></tr>
+                <tr><td>2</td><td>selten – alle paar Jahre</td><td>gering – unter 200 € oder ein Abend</td></tr>
+                <tr><td>3</td><td>möglich – etwa einmal pro Jahr</td><td>spürbar – bis 1.000 € oder ein Festtag</td></tr>
+                <tr><td>4</td><td>wahrscheinlich – mehrmals pro Saison</td><td>schwer – Fest gelaufen, Ruf leidet</td></tr>
+                <tr><td>5</td><td>sehr wahrscheinlich – fast jedes Mal</td><td>existenziell – Gesundheit, Lizenz, Truck</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="muted small" style="margin-top:10px">Die Schwellen sind Beispiele. Wichtig ist, dass sie <strong>vorher</strong> festgelegt und für alle Einträge gleich sind.</p>
+        </div>
+        <div>
+          <h3>Achsen, die etwas trennen</h3>
+          <p class="muted">Die zwei Achsen sollten <strong>unabhängig</strong> sein. Hängen sie zusammen, landet alles auf einer Diagonale – und die Matrix ist eine verkappte Liste.</p>
+          <div class="vs">
+            <div class="no"><span>✕</span><span>Wert und Umsatz<small>Fast dasselbe – alle Ideen liegen auf der Diagonale.</small></span></div>
+            <div class="no"><span>✕</span><span>„Priorität“ als Achse<small>Das ist das Ergebnis, kein Kriterium.</small></span></div>
+            <div class="yes"><span>✓</span><span>Wert und Aufwand<small>Unabhängig: Es gibt teure wertvolle und billige wertvolle Ideen.</small></span></div>
+          </div>
+          <h3 style="margin-top:28px">Stufen oder stufenlos?</h3>
+          <p class="muted">Stufen (1–5) erzwingen eine Entscheidung und eignen sich für schnelle Bewertungen im Team. Stufenlose Achsen zeigen feine Unterschiede – verführen aber zu Scheingenauigkeit. Die Richtung einer Achse ist frei: Bei Eisenhower steht „dringend“ links.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:44px">So ordnest du im Team ein</h3>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="card">
+          <div class="icon">⇄</div>
+          <h3>Relativ statt absolut</h3>
+          <p class="muted">Zuerst grob in die Felder, dann vergleichen: Ist A wertvoller als B? Paarweise Vergleiche sind verlässlicher als Zahlen aus dem Bauch.</p>
+        </div>
+        <div class="card">
+          <div class="icon">✎</div>
+          <h3>Erst einzeln, dann gemeinsam</h3>
+          <p class="muted">Jede Person schätzt für sich, dann werden Abweichungen besprochen. Große Unterschiede zeigen, wo Wissen oder Annahmen auseinandergehen.</p>
+        </div>
+        <div class="card">
+          <div class="icon">≈</div>
+          <h3>Grenzfälle ernst nehmen</h3>
+          <p class="muted">Einträge nahe einer Trennlinie können kippen. Die App weist darauf hin („Knapp an der Grenze“) – ein zweiter Blick oder eine Begründung lohnt sich.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANPASSEN -->
+  <section id="anpassen">
+    <div class="wrap">
+      <span class="eyebrow">07 · Anpassen &amp; Kombinieren</span>
+      <h2>Vorlagen sind ein Anfang, kein Korsett</h2>
+      <p class="lead">Jede Matrix trägt ihre Einstellungen selbst. Was du unter „Achsen &amp; Bereiche“ änderst, gilt nur für diese Matrix – bis du es als eigene Vorlage speicherst.</p>
+      <div class="grid-3" style="margin-top:28px">
+        <div class="card">
+          <div class="icon">⚙</div>
+          <h3>Achsen &amp; Bereiche</h3>
+          <p class="muted">Achsen umbenennen, Skala und Schritte ändern, Trennlinien verschieben, Stufen und Zonen anpassen, Felder ein- und ausblenden. Positionen werden bei geänderter Skala umgerechnet; ausgeblendete Felder behalten ihre Werte.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⇢</div>
+          <h3>Einträge übernehmen</h3>
+          <p class="muted">Einträge aus einer anderen Matrix übernehmen – etwa die Maßnahmen aus der Risikomatrix nach Wert und Aufwand priorisieren oder die Ideen aus Wert/Aufwand nach Stacey einordnen.</p>
+        </div>
+        <div class="card">
+          <div class="icon">▤</div>
+          <h3>Bericht &amp; Export</h3>
+          <p class="muted">Matrix als Bild, Rangfolge, Einträge je Bereich mit Notiz und Feldern – zum Drucken oder als PDF, PNG, Markdown, CSV oder JSON. Gespeichert wird automatisch im Browser.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:44px">Bekannte Matrizen mit „Eigene Matrix“ nachbauen</h3>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="card more-m">
+          <h3>BCG-Matrix</h3>
+          <p class="axes-s">X: relativer Marktanteil · Y: Marktwachstum · vier Felder</p>
+          <div class="q4"><span>Question Marks</span><span>Stars</span><span>Poor Dogs</span><span>Cash Cows</span></div>
+          <p class="how">Produkte oder Geschäftsfelder bewerten – wo investieren, wo ernten, wo aussteigen?</p>
+        </div>
+        <div class="card more-m">
+          <h3>Kraljic-Matrix</h3>
+          <p class="axes-s">X: Versorgungsrisiko · Y: Ergebniseinfluss · vier Felder</p>
+          <div class="q4"><span>Hebelprodukte</span><span>Strategische</span><span>Unkritische</span><span>Engpassprodukte</span></div>
+          <p class="how">Einkauf: Für welche Güter lohnt sich welche Beschaffungsstrategie?</p>
+        </div>
+        <div class="card more-m">
+          <h3>Dringlichkeit / Auswirkung</h3>
+          <p class="axes-s">X: Auswirkung · Y: Dringlichkeit · Raster mit Stufen</p>
+          <div class="q4"><span>P1 · kritisch</span><span>P2 · hoch</span><span>P3 · mittel</span><span>P4 · niedrig</span></div>
+          <p class="how">Störungen und Tickets priorisieren – wie die Risikomatrix, nur mit anderen Achsen.</p>
+        </div>
+      </div>
+      <p class="muted small" style="margin-top:16px">Neue Methoden lassen sich in der App auch fest ergänzen – je eine Datei mit Achsen, Bereichen, Feldern, Texten und Hinweisen (Anleitung in <a href="https://github.com/method-commons/two-axis-matrix-app/blob/main/docs/METHODEN.md" target="_blank" rel="noopener">docs/METHODEN.md</a>).</p>
+    </div>
+  </section>
+
+  <!-- PRAXIS -->
+  <section id="praxis">
+    <div class="wrap">
+      <span class="eyebrow">08 · Praxistipps</span>
+      <h2>Typische Fehler – und wie du sie vermeidest</h2>
+      <div class="grid-2" style="margin-top:28px">
+        <div class="card dd do">
+          <h3>✓ So gelingt’s</h3>
+          <ul>
+            <li>Die Frage zuerst klären – dann die Methode wählen.</li>
+            <li>Achsen vor dem Einordnen verankern, mit Beispielen je Stufe.</li>
+            <li>Erst sammeln, dann einordnen – der Eingang ist dafür da.</li>
+            <li>Je Eintrag eine kurze Begründung notieren.</li>
+            <li>Aus jedem Bereich eine Handlung ableiten: Person, Termin, Maßnahme, Strategie.</li>
+            <li>Die Matrix regelmäßig neu ansehen – Positionen ändern sich.</li>
+          </ul>
+        </div>
+        <div class="card dd dont">
+          <h3>✕ Typische Fallen</h3>
+          <ul>
+            <li><b>Alles oben rechts</b> – wenn alles wichtig ist, ist nichts wichtig. Relativ vergleichen.</li>
+            <li><b>Abhängige Achsen</b> – alle Einträge auf einer Diagonale sagen nichts.</li>
+            <li><b>Scheingenauigkeit</b> – 6,5 statt 7 ist meist geraten, nicht gemessen.</li>
+            <li><b>Schöne Bilder, keine Folgen</b> – eine Matrix ohne Maßnahmen ist Dekoration.</li>
+            <li><b>Dringendes mit Wichtigem verwechseln</b> – Lautstärke ist kein Ziel.</li>
+            <li><b>Einmal und nie wieder</b> – Risiken, Stakeholder und Prioritäten bewegen sich.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="wrap">
+      <span class="eyebrow">09 · Wissenscheck</span>
+      <h2>Sechs Fragen zum Abschluss</h2>
+      <p class="lead">Teste dein Verständnis. Die Erklärung erscheint nach deiner Antwort.</p>
+      <div class="quiz" id="quizBox"></div>
+      <p class="muted" id="quizScore" style="margin-top:16px"></p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="border-top:0;padding-top:24px">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2 style="margin-bottom:.3em">Jetzt die eigene Matrix anlegen</h2>
+          <p>Mit der 2-Achsen-Matrix-App erfasst du Einträge, ordnest sie per Ziehen oder Tastatur ein, bekommst Hinweise zur Methode und druckst oder exportierst das Ergebnis – alles im Browser, ohne Konto. Die Food-Truck-Beispiele sind schon dabei.</p>
+        </div>
+        <a class="btn" href="https://method-commons.github.io/two-axis-matrix-app/" target="_blank" rel="noopener">App öffnen ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>2-Achsen-Matrix · Kurzschulung · <a href="https://github.com/method-commons/two-axis-matrix-app" target="_blank" rel="noopener">App auf GitHub</a></span>
+    <span>Methodik nach Eisenhower und Covey, Mendelow, Stacey u. a. · Beispiele fiktiv</span>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle
+  (function () {
+    const root = document.documentElement;
+    let saved = null;
+    try { saved = localStorage.getItem('2a-theme'); } catch (e) {}
+    if (saved) root.dataset.theme = saved;
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const dark = root.dataset.theme
+        ? root.dataset.theme === 'dark'
+        : matchMedia('(prefers-color-scheme: dark)').matches;
+      root.dataset.theme = dark ? 'light' : 'dark';
+      try { localStorage.setItem('2a-theme', root.dataset.theme); } catch (e) {}
+    });
+  })();
+
+  // Mobile menu
+  (function () {
+    const nav = document.querySelector('nav.top');
+    const btn = document.getElementById('menuToggle');
+    const set = open => { nav.classList.toggle('open', open); btn.setAttribute('aria-expanded', open); btn.innerHTML = open ? '<span aria-hidden="true">✕</span> <span class="menu-label">Schließen</span>' : '<span aria-hidden="true">☰</span> <span class="menu-label">Menü</span>'; btn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen'); };
+    btn.addEventListener('click', () => set(!nav.classList.contains('open')));
+    nav.querySelectorAll('ul a').forEach(a => a.addEventListener('click', () => set(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+  })();
+
+  // ───────────────────────── Methoden – Einstellungen und Texte wie in der App (js/methods/*.js) ─────────────────────────
+  const STANCES = [{ id: 'pro', color: 'green', label: 'unterstützend' }, { id: 'neutral', color: 'gray', label: 'neutral' }, { id: 'contra', color: 'red', label: 'kritisch' }];
+  const METHODS = {
+    eisenhower: {
+      name: 'Eisenhower-Matrix', short: 'Eisenhower', icon: '⏱', color: 'red',
+      layout: 'quadrants', view: 'board',
+      x: { min: 1, max: 2, step: 1, reverse: true, label: 'Dringlichkeit', low: 'nicht dringend', high: 'dringend' },
+      y: { min: 1, max: 2, step: 1, label: 'Wichtigkeit', low: 'nicht wichtig', high: 'wichtig' },
+      split: { x: 1.5, y: 1.5 },
+      regions: [
+        { id: 'do', color: 'red', qx: 'high', qy: 'high', label: 'Sofort erledigen', hint: 'wichtig & dringend – selbst, jetzt' },
+        { id: 'plan', color: 'green', qx: 'low', qy: 'high', label: 'Einplanen', hint: 'wichtig, nicht dringend – Zeit blocken' },
+        { id: 'delegate', color: 'orange', qx: 'high', qy: 'low', label: 'Delegieren', hint: 'dringend, nicht wichtig – abgeben' },
+        { id: 'drop', color: 'gray', qx: 'low', qy: 'low', label: 'Weglassen', hint: 'weder noch – streichen oder später' }
+      ],
+      itemName: ['Aufgabe', 'Aufgaben'], noteLabel: 'Notiz',
+      fields: [{ key: 'owner', type: 'text', label: 'Wer' }, { key: 'due', type: 'date', label: 'Termin' }, { key: 'done', type: 'check', label: 'Erledigt' }],
+      rank: 'none',
+      lead: ['Was passiert, wenn ich es diese Woche nicht tue?', 'Zahlt es auf ein Ziel ein – oder nur auf jemandes Dringlichkeit?', 'Wer kann es genauso gut (oder besser)?'],
+      example: 'Wochenplanung KW 42',
+      items: [
+        ['Fettfilter wechseln (Kontrolle Do)', 2, 2, { due: '2026-10-14' }],
+        ['Gasflaschen nachbestellen', 2, 2, { due: '2026-10-15' }],
+        ['Aushilfe für Samstag finden', 2, 2, { due: '2026-10-17' }],
+        ['Kühlung Getränke reparieren', 2, 2, { done: true }],
+        ['Reinigungsplan überarbeiten', 1, 2, { due: '2026-10-21' }],
+        ['Kalkulation Wintersaison', 1, 2, { due: '2026-10-23' }],
+        ['Fritteuse warten lassen', 1, 2, {}],
+        ['Bewerbung Stadtfest 2027', 1, 2, {}],
+        ['Rechnungen ablegen', 2, 1, { owner: 'Ben' }],
+        ['Instagram-Story Standort', 2, 1, { owner: 'Mia' }],
+        ['Getränkelieferant zurückrufen', 2, 1, {}],
+        ['Newsletter-Design umbauen', 1, 1, {}],
+        ['Alte Flyer sortieren', 1, 1, {}],
+        ['Steuerberater anrufen', null, null, {}],
+        ['Foto für Lokalzeitung', null, null, {}]
+      ],
+      hints(m, { regionOf, placed, value }) {
+        const open = placed().filter(it => value(it, 'done') !== true);
+        const inRegion = id => open.filter(it => { const r = regionOf(it); return r && r.id === id; });
+        const out = [];
+        const doList = inRegion('do'), plan = inRegion('plan');
+        if (doList.length || plan.length) {
+          out.push(doList.length > plan.length
+            ? { state: 'warn', title: 'Mehr „Sofort“ als „Einplanen“', detail: doList.length + ' dringende gegenüber ' + plan.length + ' geplanten wichtigen Aufgaben – mehr vorausplanen.' }
+            : { state: 'ok', title: '„Einplanen“ gepflegt', detail: plan.length + ' wichtige Aufgaben ohne Zeitdruck – mindestens so viele wie in „Sofort“.' });
+        }
+        const noOwner = inRegion('delegate').filter(it => !String(value(it, 'owner') || '').trim());
+        if (noOwner.length) out.push({ state: 'warn', title: 'Delegieren ohne Person', detail: noOwner.length + ' delegierte Aufgabe(n) ohne „Wer“.', items: noOwner.map(i => i.id) });
+        const noDue = plan.filter(it => !value(it, 'due'));
+        if (noDue.length) out.push({ state: 'warn', title: 'Einplanen ohne Termin', detail: noDue.length + ' Aufgabe(n) in „Einplanen“ ohne Termin – ohne Zeitblock rutscht Wichtiges in „Sofort“.', items: noDue.map(i => i.id) });
+        const drop = inRegion('drop');
+        if (drop.length) out.push({ state: 'open', title: 'Weglassen wirklich weglassen', detail: drop.length + ' offene Aufgabe(n) in „Weglassen“ – streichen oder bewusst später.', items: drop.map(i => i.id) });
+        return out;
+      }
+    },
+    'value-effort': {
+      name: 'Wert / Aufwand', short: 'Wert/Aufwand', icon: '◆', color: 'green',
+      layout: 'quadrants', view: 'plot',
+      x: { min: 0, max: 10, step: 0.5, label: 'Aufwand', low: 'gering', high: 'hoch' },
+      y: { min: 0, max: 10, step: 0.5, label: 'Wert / Nutzen', low: 'gering', high: 'hoch' },
+      split: { x: 5, y: 5 },
+      regions: [
+        { id: 'quick', color: 'green', qx: 'low', qy: 'high', label: 'Quick Wins', hint: 'zuerst umsetzen' },
+        { id: 'major', color: 'blue', qx: 'high', qy: 'high', label: 'Großprojekte', hint: 'sorgfältig planen' },
+        { id: 'fill', color: 'gray', qx: 'low', qy: 'low', label: 'Lückenfüller', hint: 'nebenbei, wenn Zeit ist' },
+        { id: 'sink', color: 'red', qx: 'high', qy: 'low', label: 'Zeitfresser', hint: 'streichen' }
+      ],
+      itemName: ['Idee', 'Ideen'], noteLabel: 'Begründung',
+      fields: [],
+      rank: 'ratio',
+      lead: ['Was bringt am meisten für den geringsten Einsatz?', 'Woran messen wir den Wert – Umsatz, Zufriedenheit, Zeitersparnis?', 'Ist der Aufwand geschätzt oder geraten?'],
+      example: 'Ideen Saison 2027',
+      items: [
+        ['Vorbestellung per App', 7, 8, {}, 'Anbieter vergleichen'],
+        ['Kartenzahlung überall', 2, 8, {}, 'Zweites Lesegerät'],
+        ['Vegane Pommes-Variante', 3, 6.5, {}, 'Gleiche Fritteuse, eigenes Öl; 3 Anfragen pro Woche'],
+        ['Zweiter Truck', 9, 7, {}, 'Erst nach der Saison 2027 entscheiden'],
+        ['Stempelkarte', 2.5, 4, {}],
+        ['Saucen abfüllen und verkaufen', 7, 3.5, {}, 'Kennzeichnungspflicht'],
+        ['Instagram-Tagesstandort', 1.5, 7.5, {}, 'Mia postet täglich'],
+        ['Firmen-Catering', 6, 8.5, {}, '2 Anfragen liegen vor'],
+        ['Neues Logo', 6, 1.5, {}],
+        ['Digitale Menütafel', 3.5, 2, {}],
+        ['Lieferplattform', 7.5, 4.5, {}, 'Gebühren 30 %'],
+        ['Kombi-Angebot Mittag', 1, 5.5, {}, 'Nur Kasse umstellen']
+      ],
+      hints(m, { regionOf, placed, title }) {
+        const c = m.cfg;
+        const list = placed();
+        if (!list.length) return [];
+        const of = id => list.filter(it => { const r = regionOf(it); return r && r.id === id; });
+        const out = [];
+        const quick = of('quick').sort((a, b) => b.y / Math.max(b.x, 0.5) - a.y / Math.max(a.x, 0.5));
+        out.push(quick.length
+          ? { state: 'ok', title: 'Mit Quick Wins beginnen', detail: quick.length + ' Quick Win(s), zuerst: ' + title(quick[0]) + '.', items: quick.map(i => i.id) }
+          : { state: 'warn', title: 'Keine Quick Wins', detail: 'Gibt es kleinere Varianten der wertvollen Ideen?' });
+        const nx = 0.05 * (c.x.max - c.x.min), ny = 0.05 * (c.y.max - c.y.min);
+        const near = list.filter(it => Math.abs(it.x - c.split.x) < nx || Math.abs(it.y - c.split.y) < ny);
+        if (near.length) out.push({ state: 'warn', title: 'Knapp an der Grenze', detail: near.length + ' Idee(n) liegen nahe einer Trennlinie – Schätzung prüfen.', items: near.map(i => i.id) });
+        const sink = of('sink');
+        if (sink.length) out.push({ state: 'open', title: 'Zeitfresser streichen', detail: sink.length + ' Idee(n) mit viel Aufwand und wenig Wert.', items: sink.map(i => i.id) });
+        return out;
+      }
+    },
+    stakeholder: {
+      name: 'Macht / Interesse', short: 'Macht/Interesse', icon: '◎', color: 'orange',
+      layout: 'quadrants', view: 'plot',
+      x: { min: 1, max: 5, step: 0.5, label: 'Interesse / Betroffenheit', low: 'gering', high: 'hoch' },
+      y: { min: 1, max: 5, step: 0.5, label: 'Macht / Einfluss', low: 'gering', high: 'hoch' },
+      split: { x: 3, y: 3 },
+      regions: [
+        { id: 'satisfy', color: 'orange', qx: 'low', qy: 'high', label: 'Zufriedenstellen', hint: 'bei Bedarf einbeziehen, nicht überfrachten' },
+        { id: 'manage', color: 'red', qx: 'high', qy: 'high', label: 'Eng einbinden', hint: 'Schlüsselpersonen – aktiv beteiligen' },
+        { id: 'monitor', color: 'gray', qx: 'low', qy: 'low', label: 'Beobachten', hint: 'minimaler Aufwand' },
+        { id: 'inform', color: 'blue', qx: 'high', qy: 'low', label: 'Informieren', hint: 'regelmäßig auf dem Laufenden halten' }
+      ],
+      itemName: ['Stakeholder', 'Stakeholder'], noteLabel: 'Anliegen / Befürchtung',
+      fields: [{ key: 'stance', type: 'choice', label: 'Haltung', options: STANCES }, { key: 'strategy', type: 'text', label: 'Strategie' }],
+      colorField: 'stance',
+      rank: 'none',
+      lead: ['Wer kann das Vorhaben stoppen oder beschleunigen?', 'Wer ist betroffen, ohne gefragt zu werden?', 'Was befürchtet jemand – und was würde ihn umstimmen?'],
+      example: 'Standort Domplatz',
+      items: [
+        ['Stadtrat Wirtschaft', 1.5, 4.5, { stance: 'neutral', strategy: 'In der Bürgersprechstunde vorstellen' }, 'Kennt das Vorhaben kaum'],
+        ['Ordnungsamt', 2.5, 4, { stance: 'neutral', strategy: 'Antrag vollständig und früh einreichen' }, 'Prüft Lärm, Abstand, Brandschutz'],
+        ['Marktverwaltung', 4, 4, { stance: 'pro', strategy: 'Stellplatz und Zeiten gemeinsam festlegen' }],
+        ['Anwohnerinitiative Domviertel', 4.5, 3.5, { stance: 'contra', strategy: 'Vor dem Antrag persönlich treffen' }],
+        ['Lokalzeitung', 2, 3.5, { stance: 'neutral' }],
+        ['Café am Dom', 4.5, 1.5, { stance: 'contra', strategy: 'Gemeinsame Aktion zum Stadtfest' }],
+        ['Stammgäste', 3.5, 2, { stance: 'pro' }],
+        ['Kartoffelhof Berger', 2, 1.5, { stance: 'pro' }]
+      ],
+      hints(m, { regionOf, placed, value, title }) {
+        const list = placed();
+        const out = [];
+        const powerful = list.filter(it => it.y >= m.cfg.split.y);
+        const critical = powerful.filter(it => value(it, 'stance') === 'contra');
+        if (critical.length) out.push({ state: 'warn', title: 'Kritisch mit viel Einfluss', detail: critical.map(title).join(', ') + ' – zuerst ansprechen.', items: critical.map(i => i.id) });
+        const unknown = list.filter(it => !value(it, 'stance'));
+        if (unknown.length) out.push({ state: 'open', title: 'Haltung offen', detail: unknown.length + ' Stakeholder ohne eingeschätzte Haltung.', items: unknown.map(i => i.id) });
+        const none = list.filter(it => { const r = regionOf(it); return r && r.id === 'manage'; }).filter(it => !String(value(it, 'strategy') || '').trim());
+        if (none.length) out.push({ state: 'warn', title: 'Schlüsselpersonen ohne Strategie', detail: none.length + ' Stakeholder in „Eng einbinden“ ohne Strategie.', items: none.map(i => i.id) });
+        return out;
+      }
+    },
+    risk: {
+      name: 'Risikomatrix', short: 'Risikomatrix', icon: '▦', color: 'orange',
+      layout: 'grid', view: 'heatmap',
+      x: { min: 1, max: 5, step: 1, label: 'Auswirkung', low: 'unbedeutend', high: 'existenziell' },
+      y: { min: 1, max: 5, step: 1, label: 'Wahrscheinlichkeit', low: 'sehr selten', high: 'sehr wahrscheinlich' },
+      regions: [
+        { id: 'low', color: 'green', min: 0, label: 'Niedrig', hint: 'beobachten' },
+        { id: 'medium', color: 'yellow', min: 5, label: 'Mittel', hint: 'Maßnahmen prüfen' },
+        { id: 'high', color: 'orange', min: 10, label: 'Hoch', hint: 'Maßnahmen festlegen' },
+        { id: 'critical', color: 'red', min: 15, label: 'Sehr hoch', hint: 'sofort handeln' }
+      ],
+      itemName: ['Risiko', 'Risiken'], noteLabel: 'Ursache / Folge',
+      fields: [
+        { key: 'response', type: 'choice', label: 'Strategie', options: [{ id: 'avoid', label: 'vermeiden' }, { id: 'reduce', label: 'vermindern' }, { id: 'transfer', label: 'übertragen' }, { id: 'accept', label: 'akzeptieren' }] },
+        { key: 'measure', type: 'text', label: 'Maßnahme' }
+      ],
+      rank: 'product',
+      lead: ['Was kann schiefgehen – und woran merken wir es früh?', 'Wie oft ist das schon passiert, bei uns oder anderen?', 'Was kostet es, wenn es eintritt – Geld, Zeit, Ruf, Gesundheit?'],
+      example: 'Stadtfest 2026 – Risiken',
+      items: [
+        ['Generator fällt aus', 4, 3, { response: 'reduce', measure: 'Festnetz-Strom beim Veranstalter buchen' }],
+        ['Unwetter, Fest wird unterbrochen', 5, 3, { response: 'transfer', measure: 'Ausfallversicherung, Pavillon sturmfest' }],
+        ['Personalausfall (Krankheit)', 3, 4, { response: 'reduce', measure: '2 Aushilfen auf Abruf' }],
+        ['Mängel bei der Lebensmittelkontrolle', 5, 2, { response: 'avoid' }],
+        ['Kartenzahlung offline', 2, 4, { response: 'reduce', measure: 'Wechselgeld, Offline-Modus testen' }],
+        ['Ware geht am Samstag aus', 4, 4, { response: 'reduce', measure: 'Zweite Lieferung Sa 14 Uhr fest vereinbaren' }],
+        ['Fritteuse fällt aus (Überhitzung)', 4, 2, { response: 'reduce', measure: 'Fettfilter vorher tauschen' }],
+        ['Diebstahl aus der Kasse', 3, 1, { response: 'accept' }],
+        ['Fettbrand am Stand', 5, 1, { response: 'accept', measure: 'Löschdecke und Feuerlöscher vorhanden' }]
+      ],
+      hints(m, { regionOf, placed, value, title }) {
+        const list = placed();
+        const level = it => { const r = regionOf(it); return r ? r.id : ''; };
+        const high = list.filter(it => ['high', 'critical'].includes(level(it)));
+        const out = [];
+        const none = high.filter(it => !String(value(it, 'measure') || '').trim());
+        if (none.length) out.push({ state: 'warn', title: 'Hohe Risiken ohne Maßnahme', detail: none.map(title).join(', '), items: none.map(i => i.id) });
+        else if (high.length) out.push({ state: 'ok', title: 'Hohe Risiken abgedeckt', detail: 'Alle ' + high.length + ' hohen und sehr hohen Risiken haben eine Maßnahme.' });
+        const accepted = list.filter(it => level(it) === 'critical' && value(it, 'response') === 'accept');
+        if (accepted.length) out.push({ state: 'warn', title: 'Sehr hohes Risiko akzeptiert', detail: accepted.length + ' sehr hohe(s) Risiko(s) mit Strategie „akzeptieren“ – bewusst entschieden?', items: accepted.map(i => i.id) });
+        return out;
+      }
+    },
+    stacey: {
+      name: 'Stacey-Matrix', short: 'Stacey', icon: '◠', color: 'violet',
+      layout: 'zones', view: 'plot',
+      x: { min: 0, max: 10, step: 0, label: 'Wie: Technologie / Lösungsweg', low: 'bekannt', high: 'unbekannt' },
+      y: { min: 0, max: 10, step: 0, label: 'Was: Anforderungen', low: 'Einigkeit', high: 'keine Einigkeit' },
+      regions: [
+        { id: 'simple', color: 'green', r: 0.3, label: 'Einfach', hint: 'Bewährtes Vorgehen, Checkliste – einfach erledigen' },
+        { id: 'complicated', color: 'blue', r: 0.6, label: 'Kompliziert', hint: 'Plangetrieben: analysieren, Fachleute fragen, Wasserfall' },
+        { id: 'complex', color: 'violet', r: 0.9, label: 'Komplex', hint: 'Iterativ: kleine Schritte, Feedback, Scrum/Kanban, Prototypen' },
+        { id: 'chaotic', color: 'red', r: 1.5, label: 'Chaotisch', hint: 'Erst handeln und stabilisieren, dann Ziele klären' }
+      ],
+      itemName: ['Vorhaben', 'Vorhaben'], noteLabel: 'Beschreibung',
+      fields: [],
+      questions: [
+        { id: 'goals', axis: 'y', text: 'Ziele und Anforderungen sind klar' },
+        { id: 'agree', axis: 'y', text: 'Alle Beteiligten wollen dasselbe' },
+        { id: 'done', axis: 'x', text: 'Wir haben so etwas schon gemacht' },
+        { id: 'tech', axis: 'x', text: 'Weg und Technik sind bekannt' }
+      ],
+      rank: 'none',
+      lead: ['Wissen wir, was am Ende herauskommen soll – und sind sich alle einig?', 'Haben wir so etwas schon einmal gemacht?', 'Was lernen wir erst unterwegs?'],
+      example: 'Vorhaben 2027',
+      items: [
+        ['Saisonkarte aktualisieren', 1.3, 1.3, {}, '', { goals: 1, agree: 2, done: 1, tech: 2 }],
+        ['Kassensystem wechseln', 5, 2.5, {}, '', { goals: 2, agree: 2, done: 3, tech: 3 }],
+        ['Vorbestell-App', 6.3, 5, {}, '', { goals: 3, agree: 3, done: 4, tech: 3 }],
+        ['Zweiter Truck', 6.3, 6.3, {}, 'Standort, Personal und Finanzierung offen', { goals: 3, agree: 4, done: 3, tech: 4 }],
+        ['Firmen-Catering aufbauen', 4.4, 5.4, {}],
+        ['Abluft nach Vorschrift umbauen', 5, 1.3, {}, '', { goals: 1, agree: 2, done: 3, tech: 3 }],
+        ['Fester Stellplatz Domplatz', 1.8, 4.6, {}],
+        ['Umbau auf E-Truck', 8.8, 8.8, {}, '', { goals: 4, agree: 5, done: 5, tech: 4 }]
+      ],
+      hints(m, { regionOf, placed, title }) {
+        const list = placed();
+        const zone = id => list.filter(it => { const r = regionOf(it); return r && r.id === id; });
+        const out = [];
+        const chaotic = zone('chaotic');
+        if (chaotic.length) out.push({ state: 'warn', title: 'Chaotische Vorhaben', detail: chaotic.map(title).join(', ') + ' – zuerst Ziele klären und stabilisieren, bevor geplant wird.', items: chaotic.map(i => i.id) });
+        const complex = zone('complex');
+        if (complex.length) out.push({ state: 'ok', title: 'Komplexe Vorhaben iterativ angehen', detail: complex.length + ' Vorhaben in kurzen Schleifen mit Feedback planen.', items: complex.map(i => i.id) });
+        const guessed = list.filter(it => !Object.keys(it.answers).length);
+        if (guessed.length) out.push({ state: 'open', title: 'Ohne Fragen eingeordnet', detail: guessed.length + ' Vorhaben nur geschätzt – Fragen beantworten für eine begründete Position.', items: guessed.map(i => i.id) });
+        return out;
+      }
+    },
+    custom: {
+      name: 'Eigene Matrix', short: 'Eigene', icon: '✳', color: 'gray',
+      layout: 'quadrants', view: 'plot',
+      x: { min: 0, max: 10, step: 0, label: 'X-Achse', low: 'niedrig', high: 'hoch' },
+      y: { min: 0, max: 10, step: 0, label: 'Y-Achse', low: 'niedrig', high: 'hoch' },
+      split: { x: 5, y: 5 },
+      regions: [
+        { id: 'tl', color: 'green', qx: 'low', qy: 'high', label: 'Feld A', hint: '' },
+        { id: 'tr', color: 'blue', qx: 'high', qy: 'high', label: 'Feld B', hint: '' },
+        { id: 'bl', color: 'gray', qx: 'low', qy: 'low', label: 'Feld C', hint: '' },
+        { id: 'br', color: 'orange', qx: 'high', qy: 'low', label: 'Feld D', hint: '' }
+      ],
+      itemName: ['Eintrag', 'Einträge'], noteLabel: 'Notiz', fields: [], rank: 'none', lead: [], items: []
+    }
+  };
+  const WS_METHODS = ['eisenhower', 'value-effort', 'stakeholder', 'risk', 'stacey'];
+
+  // ───────────────────────── Geometrie – wie js/layout.js der App ─────────────────────────
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  function snap(v, min, max, step) {
+    const c = clamp(v, min, max);
+    if (!(step > 0)) return Math.round(c * 10) / 10;
+    const n = Math.round((c - min) / step);
+    return clamp(Math.round((min + n * step) * 1000) / 1000, min, max);
+  }
+  const norm = (a, v) => clamp((v - a.min) / (a.max - a.min), 0, 1);
+  const denorm = (a, u) => snap(a.min + clamp(u, 0, 1) * (a.max - a.min), a.min, a.max, a.step);
+  function steps(a) {
+    if (!(a.step > 0)) return [];
+    const n = Math.min(100, Math.round((a.max - a.min) / a.step));
+    const out = [];
+    for (let i = 0; i <= n; i++) out.push(snap(a.min + i * a.step, a.min, a.max, a.step));
+    return [...new Set(out)];
+  }
+  const score = (x, y) => Math.round(x * y * 100) / 100;
+  const distance = (c, x, y) => Math.hypot(norm(c.x, x), norm(c.y, y));
+  function regionAt(c, x, y) {
+    if (c.layout === 'quadrants') {
+      const qx = x >= c.split.x ? 'high' : 'low', qy = y >= c.split.y ? 'high' : 'low';
+      return c.regions.find(r => r.qx === qx && r.qy === qy) || null;
+    }
+    if (c.layout === 'grid') {
+      const s = score(x, y);
+      const sorted = c.regions.slice().sort((a, b) => b.min - a.min);
+      return sorted.find(r => s >= r.min) || sorted[sorted.length - 1];
+    }
+    const d = distance(c, x, y);
+    const sorted = c.regions.slice().sort((a, b) => a.r - b.r);
+    return sorted.find(r => d <= r.r) || sorted[sorted.length - 1];
+  }
+  const regionOf = (c, it) => it.x == null || it.y == null ? null : regionAt(c, it.x, it.y);
+  function centerOf(c, r) {
+    if (c.layout === 'quadrants') {
+      const mid = (a, s, q) => snap(q === 'high' ? (s + a.max) / 2 : (a.min + s) / 2, a.min, a.max, a.step);
+      const p = { x: mid(c.x, c.split.x, r.qx), y: mid(c.y, c.split.y, r.qy) };
+      if (regionAt(c, p.x, p.y) !== r) {
+        if (r.qx === 'low' && p.x >= c.split.x) p.x = snap(c.split.x - (c.x.step || 0.1), c.x.min, c.x.max, c.x.step);
+        if (r.qy === 'low' && p.y >= c.split.y) p.y = snap(c.split.y - (c.y.step || 0.1), c.y.min, c.y.max, c.y.step);
+      }
+      return p;
+    }
+    if (c.layout === 'zones') {
+      const sorted = c.regions.slice().sort((a, b) => a.r - b.r);
+      const i = sorted.indexOf(r);
+      const inner = i > 0 ? sorted[i - 1].r : 0;
+      const d = (inner + Math.min(r.r, Math.SQRT2)) / 2 / Math.SQRT2;
+      return { x: denorm(c.x, d), y: denorm(c.y, d) };
+    }
+    const xs = steps(c.x), ys = steps(c.y);
+    for (let i = 0; i < Math.max(xs.length, ys.length); i++) {
+      const p = { x: xs[Math.min(i, xs.length - 1)], y: ys[Math.min(i, ys.length - 1)] };
+      if (regionAt(c, p.x, p.y) === r) return p;
+    }
+    for (const x of xs) for (const y of ys) if (regionAt(c, x, y) === r) return { x, y };
+    return { x: xs[0], y: ys[0] };
+  }
+  function fromAnswers(c, answers) {
+    const out = {};
+    for (const axis of ['x', 'y']) {
+      const vals = (c.questions || []).filter(q => q.axis === axis && answers[q.id] != null).map(q => answers[q.id]);
+      if (!vals.length) continue;
+      const avg = vals.reduce((s, v) => s + v, 0) / vals.length;
+      out[axis] = denorm(c[axis], (avg - 1) / 4);
+    }
+    return out;
+  }
+  function ranking(c, items) {
+    const list = items.filter(it => it.x != null && it.y != null).map(it => ({
+      it, s: c.rank === 'ratio' ? (it.x > 0 ? Math.round(it.y / it.x * 100) / 100 : it.y > 0 ? Infinity : 0) : c.rank === 'product' ? score(it.x, it.y) : null
+    }));
+    return c.rank === 'none' ? list.sort((a, b) => a.it.no - b.it.no) : list.sort((a, b) => b.s - a.s || a.it.no - b.it.no);
+  }
+  function colorOf(c, it) {
+    if (c.colorField) {
+      const f = c.fields.find(x => x.key === c.colorField);
+      const o = f && f.options.find(x => x.id === it.values[c.colorField]);
+      if (o && o.color) return o.color;
+    }
+    const r = regionOf(c, it);
+    return r ? r.color : 'gray';
+  }
+
+  // ───────────────────────── Zeichnen ─────────────────────────
+  const esc = s => String(s).replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+  const fmt = v => String(v).replace('.', ',');
+  const cut = (s, n) => s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s;
+  const todayISO = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  const initials = s => s.trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+  // Geometrie der Zeichnung: Fläche (P) innerhalb der viewBox
+  function frame(opts) {
+    return opts.mini ? { W: 240, H: 180, x: 4, y: 4, w: 232, h: 172 } : { W: 520, H: 432, x: 58, y: 8, w: 452, h: 372 };
+  }
+  // Mitte eines Eintrags in Anteilen (0 … 1 von links bzw. oben)
+  function toFrac(c, x, y) {
+    if (c.view === 'heatmap') {
+      const xs = steps(c.x), ys = steps(c.y);
+      const i = xs.indexOf(x), j = ys.indexOf(y);
+      const u = (i + 0.5) / xs.length, v = (j + 0.5) / ys.length;
+      return { fx: c.x.reverse ? 1 - u : u, fy: 1 - v };
+    }
+    const u = norm(c.x, x), v = norm(c.y, y);
+    return { fx: c.x.reverse ? 1 - u : u, fy: 1 - v };
+  }
+  // Anteile (0 … 1 von links bzw. oben) → Werte auf der Skala
+  function fromFrac(c, fx, fy) {
+    fx = clamp(fx, 0, 1); fy = clamp(fy, 0, 1);
+    const ux = c.x.reverse ? 1 - fx : fx, uy = 1 - fy;
+    if (c.view === 'heatmap') {
+      const xs = steps(c.x), ys = steps(c.y);
+      return { x: xs[clamp(Math.floor(ux * xs.length), 0, xs.length - 1)], y: ys[clamp(Math.floor(uy * ys.length), 0, ys.length - 1)] };
+    }
+    return { x: denorm(c.x, ux), y: denorm(c.y, uy) };
+  }
+
+  function renderMatrix(c, items, opts = {}) {
+    const F = frame(opts);
+    const P = (fx, fy) => [F.x + fx * F.w, F.y + fy * F.h];
+    const sel = opts.selected, hl = opts.highlight || new Set();
+    let s = '<svg viewBox="0 0 ' + F.W + ' ' + F.H + '" role="img" aria-label="' + esc(c.name) + '">';
+    s += '<defs><clipPath id="clip' + opts.uid + '"><rect x="' + F.x + '" y="' + F.y + '" width="' + F.w + '" height="' + F.h + '" rx="8"/></clipPath></defs>';
+    s += '<g clip-path="url(#clip' + opts.uid + ')">';
+    // Bereiche
+    if (c.layout === 'quadrants') {
+      const sp = toFrac(c, c.split.x, c.split.y);
+      c.regions.forEach(r => {
+        const right = (r.qx === 'high') !== !!c.x.reverse, top = r.qy === 'high';
+        const x0 = right ? sp.fx : 0, x1 = right ? 1 : sp.fx, y0 = top ? 0 : sp.fy, y1 = top ? sp.fy : 1;
+        const [ax, ay] = P(x0, y0), [bx, by] = P(x1, y1);
+        s += '<rect class="rg c-' + r.color + '" x="' + ax + '" y="' + ay + '" width="' + (bx - ax) + '" height="' + (by - ay) + '"/>';
+      });
+      const [lx, ly] = P(sp.fx, sp.fy);
+      s += '<path class="split" d="M' + lx + ' ' + F.y + 'V' + (F.y + F.h) + 'M' + F.x + ' ' + ly + 'H' + (F.x + F.w) + '"/>';
+    } else if (c.layout === 'zones') {
+      const sorted = c.regions.slice().sort((a, b) => b.r - a.r);
+      const [ox, oy] = P(c.x.reverse ? 1 : 0, 1);
+      sorted.forEach((r, i) => {
+        s += i === 0
+          ? '<rect class="rg c-' + r.color + '" x="' + F.x + '" y="' + F.y + '" width="' + F.w + '" height="' + F.h + '"/>'
+          : '<ellipse class="rg c-' + r.color + '" cx="' + ox + '" cy="' + oy + '" rx="' + r.r * F.w + '" ry="' + r.r * F.h + '"/>';
+      });
+    } else {
+      const xs = steps(c.x), ys = steps(c.y);
+      xs.forEach((x, i) => ys.forEach((y, j) => {
+        const r = regionAt(c, x, y);
+        const col = c.x.reverse ? xs.length - 1 - i : i, row = ys.length - 1 - j;
+        const cw = F.w / xs.length, ch = F.h / ys.length;
+        const cx = F.x + col * cw, cy = F.y + row * ch;
+        s += '<g class="c-' + r.color + '"><rect class="rg-strong" x="' + cx + '" y="' + cy + '" width="' + cw + '" height="' + ch + '"/>';
+        if (!opts.mini) s += '<text class="cs" x="' + (cx + cw - 6) + '" y="' + (cy + 14) + '" text-anchor="end">' + fmt(score(x, y)) + '</text>';
+        s += '</g>';
+      }));
+    }
+    // Namen der Bereiche
+    if (!opts.mini || opts.labels) {
+      const big = !opts.mini;
+      if (c.layout === 'quadrants') {
+        c.regions.forEach(r => {
+          const right = (r.qx === 'high') !== !!c.x.reverse, top = r.qy === 'high';
+          const x = right ? F.x + F.w - 10 : F.x + 10, anchor = right ? 'end' : 'start';
+          const withHint = big && r.hint && c.view !== 'board';
+          const y = top ? F.y + 20 : F.y + F.h - (withHint ? 22 : 9);
+          s += '<g class="c-' + r.color + '"><text class="rl" x="' + x + '" y="' + y + '" text-anchor="' + anchor + '">' + esc(r.label) + '</text>';
+          if (withHint) s += '<text class="rh" x="' + x + '" y="' + (y + 14) + '" text-anchor="' + anchor + '">' + esc(cut(r.hint, 34)) + '</text>';
+          s += '</g>';
+        });
+      } else if (c.layout === 'zones') {
+        const sorted = c.regions.slice().sort((a, b) => a.r - b.r);
+        sorted.forEach((r, i) => {
+          if (i === sorted.length - 1) {
+            s += '<g class="c-' + r.color + '"><text class="rl" x="' + (F.x + F.w - 10) + '" y="' + (F.y + 20) + '" text-anchor="end">' + esc(r.label) + '</text></g>';
+          } else {
+            const inner = i > 0 ? sorted[i - 1].r : 0;
+            const [x, y] = P(Math.min(inner + 0.02, 0.95), 1);
+            s += '<g class="c-' + r.color + '"><text class="rl" x="' + (x + 2) + '" y="' + (y - 8) + '">' + esc(r.label) + '</text></g>';
+          }
+        });
+      }
+    }
+    s += '</g>';
+    // Einträge
+    const placed = items.filter(it => it.x != null && it.y != null);
+    if (c.view === 'board') {
+      const groups = new Map(c.regions.map(r => [r, []]));
+      placed.forEach(it => groups.get(regionOf(c, it)).push(it));
+      const sp = toFrac(c, c.split.x, c.split.y);
+      const today = todayISO();
+      groups.forEach((list, r) => {
+        const right = (r.qx === 'high') !== !!c.x.reverse, top = r.qy === 'high';
+        const [ax, ay] = P(right ? sp.fx : 0, top ? 0 : sp.fy), [bx, by] = P(right ? 1 : sp.fx, top ? sp.fy : 1);
+        const x0 = ax + 8, w = bx - ax - 16;
+        let y = top ? ay + 32 : ay + 8;
+        const yMax = top ? by - 6 : by - 30;
+        const fit = Math.max(0, Math.floor((yMax - y + 4) / 28));
+        list.forEach((it, k) => {
+          if (k >= fit) return;
+          if (k === fit - 1 && list.length > fit) {
+            s += '<text class="more" x="' + (x0 + 4) + '" y="' + (y + 15) + '">+ ' + (list.length - fit + 1) + ' weitere</text>';
+            return;
+          }
+          const done = it.values.done === true, due = it.values.due, owner = String(it.values.owner || '').trim();
+          const cls = 'card-it c-' + r.color + (it.id === sel ? ' sel' : '') + (hl.has(it.id) ? ' hl' : '') + (done ? ' done' : '');
+          let meta = '', mw = 0;
+          if (owner) { mw += 22; meta += '<circle class="av" cx="' + (x0 + w - 13) + '" cy="' + (y + 12) + '" r="9"/><text class="avt" x="' + (x0 + w - 13) + '" y="' + (y + 15) + '" text-anchor="middle">' + esc(initials(owner)) + '</text>'; }
+          if (due) { const [, mm, dd] = due.split('-'); const late = !done && due < today; meta += '<text class="cm' + (late ? ' late' : '') + '" x="' + (x0 + w - 8 - mw) + '" y="' + (y + 16) + '" text-anchor="end">' + dd + '.' + mm + '.</text>'; mw += 40; }
+          const maxChars = Math.max(8, Math.floor((w - 16 - mw) / 6.3));
+          s += '<g class="' + cls + '" data-id="' + it.id + '"><rect class="cbox" x="' + x0 + '" y="' + y + '" width="' + w + '" height="24" rx="6"/>';
+          s += '<text class="ct" x="' + (x0 + 8) + '" y="' + (y + 16) + '">' + (done ? '✓ ' : '') + esc(cut(it.title || '(ohne Titel)', maxChars)) + '</text>' + meta + '<title>' + esc('#' + it.no + ' ' + (it.title || '')) + '</title></g>';
+          y += 28;
+        });
+      });
+    } else {
+      const cellCount = new Map();
+      const pos = placed.map(it => {
+        const f = toFrac(c, it.x, it.y);
+        let [px, py] = P(f.fx, f.fy);
+        if (c.view === 'heatmap') {
+          const key = it.x + '|' + it.y;
+          const k = cellCount.get(key) || 0;
+          cellCount.set(key, k + 1);
+          const n = placed.filter(o => o.x === it.x && o.y === it.y).length;
+          const per = Math.min(n, 3), row = Math.floor(k / 3), col = k % 3;
+          const rowsN = Math.ceil(n / 3);
+          px += (col - (Math.min(per, n - row * 3) - 1) / 2) * 25;
+          py += (row - (rowsN - 1) / 2) * 25 + (opts.mini ? 0 : 4);
+        }
+        return { it, px, py };
+      });
+      pos.forEach(({ it, px, py }) => {
+        const col = colorOf(c, it);
+        const cls = 'pt c-' + col + (it.id === sel ? ' sel' : '') + (hl.has(it.id) ? ' hl' : '');
+        const rad = opts.mini ? 7 : 11;
+        s += '<g class="' + cls + '" data-id="' + it.id + '">';
+        if (it.id === sel || hl.has(it.id)) s += '<circle class="ring" cx="' + px + '" cy="' + py + '" r="' + (rad + 4) + '"/>';
+        s += '<circle class="dot" cx="' + px + '" cy="' + py + '" r="' + rad + '"/>';
+        if (!opts.mini) s += '<text class="no" x="' + px + '" y="' + (py + 3.8) + '" text-anchor="middle">' + it.no + '</text>';
+        if (opts.names && c.view !== 'heatmap') {
+          const name = cut(it.title || '(ohne Titel)', 26);
+          const leftSide = px + 15 + name.length * 6.2 > F.x + F.w - 4;
+          s += '<text class="nm" x="' + (leftSide ? px - 15 : px + 15) + '" y="' + (py + 4) + '" text-anchor="' + (leftSide ? 'end' : 'start') + '">' + esc(name) + '</text>';
+        }
+        s += '<title>' + esc('#' + it.no + ' ' + (it.title || '')) + '</title></g>';
+      });
+    }
+    s += '<rect class="frame" x="' + F.x + '" y="' + F.y + '" width="' + F.w + '" height="' + F.h + '" rx="8"/>';
+    // Achsen
+    if (!opts.mini) {
+      const by = F.y + F.h + 18, ly = F.y + F.h + 40;
+      const leftPole = c.x.reverse ? c.x.high : c.x.low, rightPole = c.x.reverse ? c.x.low : c.x.high;
+      if (c.view === 'heatmap') {
+        const xs = steps(c.x), ys = steps(c.y);
+        xs.forEach((x, i) => { s += '<text class="tick" x="' + (F.x + (i + 0.5) * F.w / xs.length) + '" y="' + by + '" text-anchor="middle">' + x + '</text>'; });
+        ys.forEach((y, j) => { s += '<text class="tick" x="' + (F.x - 8) + '" y="' + (F.y + (ys.length - 1 - j + 0.5) * F.h / ys.length + 3) + '" text-anchor="end">' + y + '</text>'; });
+      }
+      s += '<text class="pole" x="' + F.x + '" y="' + ly + '">' + esc(leftPole) + '</text>';
+      s += '<text class="ax" x="' + (F.x + F.w / 2) + '" y="' + ly + '" text-anchor="middle">' + esc(c.x.label) + (c.x.reverse ? ' ←' : ' →') + '</text>';
+      s += '<text class="pole" x="' + (F.x + F.w) + '" y="' + ly + '" text-anchor="end">' + esc(rightPole) + '</text>';
+      const ax = F.x - (c.view === 'heatmap' ? 26 : 12);
+      s += '<g transform="translate(' + ax + ' ' + (F.y + F.h) + ') rotate(-90)"><text class="pole" x="0" y="0">' + esc(c.y.low) + '</text></g>';
+      s += '<g transform="translate(' + ax + ' ' + (F.y + F.h / 2) + ') rotate(-90)"><text class="ax" x="0" y="0" text-anchor="middle">' + esc(c.y.label) + ' →</text></g>';
+      s += '<g transform="translate(' + ax + ' ' + F.y + ') rotate(-90)"><text class="pole" x="0" y="0" text-anchor="end">' + esc(c.y.high) + '</text></g>';
+    }
+    return s + '</svg>';
+  }
+
+  // Eintrag aus Beispieldaten
+  let nextId = 1;
+  function makeItems(c) {
+    return c.items.map(([title, x, y, values, note, answers], i) => ({ id: 'i' + (nextId++), no: i + 1, title, x, y, values: { ...(values || {}) }, note: note || '', answers: { ...(answers || {}) } }));
+  }
+
+  // Vorschauen (Methoden, Aufteilungen)
+  let uid = 0;
+  document.querySelectorAll('[data-preview]').forEach(el => {
+    const c = METHODS[el.dataset.preview];
+    el.innerHTML = renderMatrix(c, makeItems(c), { uid: uid++, names: false });
+  });
+  document.querySelectorAll('[data-mini]').forEach(el => {
+    const c = METHODS[el.dataset.mini];
+    el.innerHTML = renderMatrix(c, [], { uid: uid++, mini: true, labels: true });
+  });
+
+  // Reiter der Methoden
+  (function () {
+    const tabs = [...document.querySelectorAll('#methoden .tab')];
+    const show = (id, focus) => tabs.forEach(t => {
+      const on = t.dataset.tab === id;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById('p-' + t.dataset.tab).hidden = !on;
+      if (on && focus) t.focus();
+    });
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(t.dataset.tab));
+      t.addEventListener('keydown', e => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); show(tabs[(i + d + tabs.length) % tabs.length].dataset.tab, true); }
+      });
+    });
+  })();
+
+  // ───────────────────────── Werkstatt ─────────────────────────
+  const $ = id => document.getElementById(id);
+  const WS = { method: 'value-effort', items: [], selected: null, highlight: new Set(), hintKey: null, names: true, data: {} };
+  const cfg = () => METHODS[WS.method];
+  const itemById = id => WS.items.find(i => i.id === id);
+  const titleOf = it => (it.title || '').trim() || '#' + it.no;
+
+  function loadExample(id) {
+    WS.data[id] = makeItems(METHODS[id]);
+  }
+  WS_METHODS.forEach(loadExample);
+
+  // Reiter
+  $('wsTabs').innerHTML = WS_METHODS.map(id => {
+    const c = METHODS[id];
+    return '<button class="tab c-' + c.color + '" role="tab" type="button" data-ws="' + id + '" aria-selected="false"><span class="ti" aria-hidden="true">' + c.icon + '</span>' + esc(c.short) + '</button>';
+  }).join('');
+  $('wsTabs').addEventListener('click', e => { const b = e.target.closest('[data-ws]'); if (b) switchMethod(b.dataset.ws); });
+  $('wsTabs').addEventListener('keydown', e => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    const i = WS_METHODS.indexOf(WS.method);
+    switchMethod(WS_METHODS[(i + d + WS_METHODS.length) % WS_METHODS.length]);
+    $('wsTabs').querySelector('[data-ws="' + WS.method + '"]').focus();
+  });
+  document.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => {
+    switchMethod(b.dataset.try);
+    $('werkstatt').scrollIntoView({ behavior: 'smooth' });
+  }));
+
+  function switchMethod(id) {
+    WS.method = id;
+    WS.items = WS.data[id];
+    WS.selected = null;
+    clearHighlight();
+    $('wsTabs').querySelectorAll('[data-ws]').forEach(b => { const on = b.dataset.ws === id; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; });
+    renderAll();
+  }
+  function clearHighlight() { WS.highlight = new Set(); WS.hintKey = null; }
+
+  // Änderungen
+  function setPos(it, x, y) {
+    it.x = x; it.y = y;
+  }
+  function placeInRegion(it, idx) {
+    const c = cfg();
+    const r = c.regions[idx];
+    if (!r) return;
+    const p = centerOf(c, r);
+    setPos(it, p.x, p.y);
+  }
+  function addItem(title) {
+    const no = WS.items.reduce((m, i) => Math.max(m, i.no), 0) + 1;
+    const it = { id: 'i' + (nextId++), no, title, x: null, y: null, values: {}, note: '', answers: {} };
+    WS.items.push(it);
+    WS.selected = it.id;
+  }
+  function removeItem(id) {
+    const i = WS.items.findIndex(x => x.id === id);
+    if (i >= 0) WS.items.splice(i, 1);
+    if (WS.selected === id) WS.selected = null;
+    WS.highlight.delete(id);
+  }
+
+  // Hinweise: allgemeine (wie js/methods.js) und die der Methode
+  function hints() {
+    const c = cfg();
+    const out = [];
+    const open = WS.items.filter(i => i.x == null || i.y == null);
+    if (!WS.items.length) out.push({ state: 'open', title: 'Noch leer', detail: 'Im Eingang die ersten ' + c.itemName[1] + ' erfassen.' });
+    else if (open.length) out.push({ state: 'open', title: 'Eingang leeren', detail: open.length + ' Einträge sind noch nicht eingeordnet.', items: open.map(i => i.id) });
+    const untitled = WS.items.filter(i => !i.title.trim());
+    if (untitled.length) out.push({ state: 'warn', title: 'Ohne Titel', detail: untitled.length + ' Einträge haben keinen Titel.', items: untitled.map(i => i.id) });
+    if (c.hints) {
+      out.push(...c.hints({ cfg: c }, {
+        regionOf: it => regionOf(c, it),
+        placed: () => WS.items.filter(i => i.x != null && i.y != null),
+        value: (it, k) => it.values[k],
+        title: titleOf
+      }));
+    }
+    return out.map(h => ({ ...h, key: h.title }));
+  }
+
+  // Zeichnen
+  function renderAll() {
+    renderBoard();
+    renderSide();
+  }
+  function renderBoard() {
+    const c = cfg();
+    $('wsTitle').textContent = c.example + ' · ' + c.name;
+    const hadFocus = $('wsMatrix').contains(document.activeElement);
+    $('wsMatrix').innerHTML = renderMatrix(c, WS.items, { uid: 'ws', selected: WS.selected, highlight: WS.highlight, names: WS.names });
+    const svg = $('wsMatrix').querySelector('svg');
+    svg.setAttribute('tabindex', '0');
+    if (hadFocus) svg.focus({ preventScroll: true });
+    svg.setAttribute('aria-label', c.name + ' mit ' + WS.items.length + ' Einträgen – Eintrag auswählen und mit Pfeiltasten verschieben');
+    const open = WS.items.filter(i => i.x == null || i.y == null);
+    $('wsInboxItems').innerHTML = open.length
+      ? open.map(it => '<button type="button" class="ichip' + (it.id === WS.selected ? ' sel' : '') + (WS.highlight.has(it.id) ? ' hl' : '') + '" data-id="' + it.id + '"><b>' + it.no + '</b>' + esc(it.title || '(ohne Titel)') + '</button>').join('')
+      : '<span class="empty">Leer – alle Einträge sind eingeordnet.</span>';
+    $('wsInboxHint').textContent = 'hineinziehen oder auswählen und Taste 1–' + c.regions.length;
+    const counts = new Map(c.regions.map(r => [r, 0]));
+    WS.items.forEach(it => { const r = regionOf(c, it); if (r) counts.set(r, counts.get(r) + 1); });
+    $('wsLegend').innerHTML = c.regions.map((r, i) => '<span class="c-' + r.color + '"><i></i><b>' + (i + 1) + '</b> ' + esc(r.label) + (c.layout === 'grid' ? ' (ab ' + r.min + ')' : '') + ' · ' + counts.get(r) + '</span>').join('')
+      + (c.colorField ? '<span style="margin-left:auto">Punktfarbe = Haltung</span>' : '');
+  }
+
+  function rangeRow(c, axis, it) {
+    const a = c[axis];
+    const v = it[axis];
+    const step = a.step > 0 ? a.step : 0.1;
+    return '<div class="field range-row"><span class="label"><label for="wsR' + axis + '">' + esc(a.label) + '</label><output id="wsO' + axis + '">' + fmt(v) + '</output></span>'
+      + '<input type="range" id="wsR' + axis + '" data-axis="' + axis + '" min="' + a.min + '" max="' + a.max + '" step="' + step + '" value="' + v + '">'
+      + '<div class="poles"><span>' + esc(a.low) + '</span><span>' + esc(a.high) + '</span></div></div>';
+  }
+
+  function renderEditor() {
+    const c = cfg();
+    const it = WS.selected && itemById(WS.selected);
+    if (!it) {
+      $('wsEditor').innerHTML = '<p class="ed-empty">Einen Eintrag in der Matrix oder im Eingang anklicken. Dann siehst du hier Bereich, Werte und die Felder der Methode.</p>';
+      return;
+    }
+    const r = regionOf(c, it);
+    let h = '<div class="ed">';
+    h += '<div class="ed-head c-' + (r ? r.color : 'gray') + '"><span class="ed-no">' + it.no + '</span><input type="text" id="wsT" aria-label="Titel" value="' + esc(it.title) + '" placeholder="Titel"></div>';
+    h += r
+      ? '<div class="ed-region c-' + r.color + '"><b>' + esc(r.label) + '</b>' + (c.layout === 'grid' ? ' · Wert ' + fmt(score(it.x, it.y)) : '') + (r.hint ? ' <span>– ' + esc(r.hint) + '</span>' : '') + '</div>'
+      : '<div class="ed-region none"><b>Im Eingang</b> <span>– noch nicht eingeordnet</span></div>';
+    if (c.view === 'board') {
+      h += '<div class="field"><span class="label">Bereich</span><div class="rbtns">' + c.regions.map((rg, i) => '<button type="button" class="c-' + rg.color + '" data-region="' + i + '" aria-pressed="' + (r === rg) + '">' + (i + 1) + ' · ' + esc(rg.label) + '</button>').join('') + '</div></div>';
+    } else if (r) {
+      h += rangeRow(c, 'x', it) + rangeRow(c, 'y', it);
+    } else {
+      h += '<div class="field"><span class="label">Einordnen</span><div class="rbtns">' + c.regions.map((rg, i) => '<button type="button" class="c-' + rg.color + '" data-region="' + i + '">' + (i + 1) + ' · ' + esc(rg.label) + '</button>').join('') + '</div></div>';
+    }
+    if (c.questions) {
+      h += '<div class="field"><span class="label">Fragen <small>– 1 = trifft zu … 5 = trifft nicht zu</small></span><div style="display:grid;gap:6px">';
+      c.questions.forEach(q => {
+        h += '<div class="q-row"><span>' + esc(q.text) + '<small>' + (q.axis === 'x' ? 'Wie' : 'Was') + '</small></span><span class="seg" role="group" aria-label="' + esc(q.text) + '">'
+          + [1, 2, 3, 4, 5].map(n => '<button type="button" data-q="' + q.id + '" data-v="' + n + '" aria-pressed="' + (it.answers[q.id] === n) + '">' + n + '</button>').join('') + '</span></div>';
+      });
+      h += '</div></div>';
+    }
+    const fields = c.fields.map(f => {
+      const v = it.values[f.key];
+      if (f.type === 'choice') return '<div class="field"><label for="wsF' + f.key + '">' + esc(f.label) + '</label><select id="wsF' + f.key + '" data-f="' + f.key + '"><option value="">–</option>' + f.options.map(o => '<option value="' + o.id + '"' + (v === o.id ? ' selected' : '') + '>' + esc(o.label) + '</option>').join('') + '</select></div>';
+      if (f.type === 'check') return '<label class="check-line"><input type="checkbox" data-f="' + f.key + '"' + (v ? ' checked' : '') + '> ' + esc(f.label) + '</label>';
+      return '<div class="field"><label for="wsF' + f.key + '">' + esc(f.label) + '</label><input type="' + (f.type === 'date' ? 'date' : 'text') + '" id="wsF' + f.key + '" data-f="' + f.key + '" value="' + esc(v || '') + '"></div>';
+    });
+    const pairs = [];
+    const nonCheck = fields.filter((_, i) => c.fields[i].type !== 'check'), checks = fields.filter((_, i) => c.fields[i].type === 'check');
+    for (let i = 0; i < nonCheck.length; i += 2) pairs.push(nonCheck[i + 1] ? '<div class="row-2">' + nonCheck[i] + nonCheck[i + 1] + '</div>' : nonCheck[i]);
+    h += pairs.join('') + checks.join('');
+    h += '<div class="field"><label for="wsNote">' + esc(c.noteLabel) + '</label><input type="text" id="wsNote" value="' + esc(it.note) + '"></div>';
+    h += '<div class="row-tools">' + (r ? '<button class="btn btn-ghost btn-sm" type="button" id="wsToInbox">In den Eingang</button>' : '') + '<button class="btn btn-ghost btn-sm" type="button" id="wsDel">Löschen</button></div>';
+    $('wsEditor').innerHTML = h + '</div>';
+  }
+
+  function renderSide() {
+    renderEditor();
+    renderInfo();
+  }
+  // Hinweise, Rangfolge, Leitfragen – ohne den Editor neu aufzubauen (Schieberegler, Tippen)
+  function renderInfo() {
+    const c = cfg();
+    const hs = hints();
+    $('wsHints').innerHTML = hs.length ? hs.map(hn => {
+      const sym = hn.state === 'ok' ? '✓' : hn.state === 'warn' ? '!' : '○';
+      const body = '<b>' + esc(hn.title) + '</b> – <span class="muted">' + esc(hn.detail) + '</span>';
+      return '<li class="' + hn.state + (WS.hintKey === hn.key ? ' on' : '') + '"><span class="sym">' + sym + '</span>'
+        + (hn.items && hn.items.length ? '<button type="button" class="hint" data-hint="' + esc(hn.key) + '">' + body + '</button>' : '<span>' + body + '</span>') + '</li>';
+    }).join('') : '<li class="ok"><span class="sym">✓</span><span>Keine Hinweise.</span></li>';
+    if (c.rank !== 'none') {
+      $('wsRankBlock').hidden = false;
+      $('wsRankBy').textContent = c.rank === 'ratio' ? 'Wert ÷ Aufwand' : 'Wahrscheinlichkeit × Auswirkung';
+      const list = ranking(c, WS.items).slice(0, 6);
+      $('wsRank').innerHTML = list.length ? list.map(({ it, s }) => '<li>' + esc(titleOf(it)) + ' <span>· ' + (s === Infinity ? '∞' : fmt(s)) + '</span></li>').join('') : '<li class="muted">Noch nichts eingeordnet.</li>';
+    } else $('wsRankBlock').hidden = true;
+    $('wsLead').innerHTML = c.lead.map(q => '<li>' + esc(q) + '</li>').join('');
+  }
+
+  // Seitenleiste: Eingaben
+  $('wsEditor').addEventListener('input', e => {
+    const it = itemById(WS.selected);
+    if (!it) return;
+    const el = e.target;
+    if (el.id === 'wsT') { it.title = el.value; renderBoard(); renderInfo(); return; }
+    if (el.id === 'wsNote') { it.note = el.value; return; }
+    if (el.dataset.axis) {
+      const a = cfg()[el.dataset.axis];
+      const v = snap(parseFloat(el.value), a.min, a.max, a.step);
+      it[el.dataset.axis] = v;
+      $('wsO' + el.dataset.axis).textContent = fmt(v);
+      renderBoard(); renderInfo(); updateRegionBox(it); return;
+    }
+    if (el.dataset.f && el.type !== 'checkbox' && el.tagName !== 'SELECT') { it.values[el.dataset.f] = el.value; renderBoard(); renderInfo(); }
+  });
+  $('wsEditor').addEventListener('change', e => {
+    const it = itemById(WS.selected);
+    if (!it) return;
+    const el = e.target;
+    if (el.dataset.f && (el.type === 'checkbox' || el.tagName === 'SELECT')) {
+      it.values[el.dataset.f] = el.type === 'checkbox' ? el.checked : el.value;
+      renderBoard(); renderInfo();
+    }
+  });
+  $('wsEditor').addEventListener('click', e => {
+    const it = itemById(WS.selected);
+    if (!it) return;
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.region != null) { placeInRegion(it, +b.dataset.region); renderAll(); }
+    else if (b.dataset.q) {
+      const v = +b.dataset.v;
+      if (it.answers[b.dataset.q] === v) delete it.answers[b.dataset.q]; else it.answers[b.dataset.q] = v;
+      const p = fromAnswers(cfg(), it.answers);
+      if (p.x != null) it.x = p.x;
+      if (p.y != null) it.y = p.y;
+      if (it.x != null && it.y == null) it.y = cfg().y.min;
+      if (it.y != null && it.x == null) it.x = cfg().x.min;
+      renderAll();
+    } else if (b.id === 'wsToInbox') { setPos(it, null, null); renderAll(); }
+    else if (b.id === 'wsDel') { removeItem(it.id); renderAll(); }
+  });
+  // Bereich im Kopf des Editors nachführen, während ein Schieberegler bewegt wird
+  function updateRegionBox(it) {
+    const c = cfg();
+    const r = regionOf(c, it);
+    const head = $('wsEditor').querySelector('.ed-head');
+    const box = $('wsEditor').querySelector('.ed-region');
+    if (!r || !head || !box) return;
+    head.className = 'ed-head c-' + r.color;
+    box.className = 'ed-region c-' + r.color;
+    box.innerHTML = '<b>' + esc(r.label) + '</b>' + (c.layout === 'grid' ? ' · Wert ' + fmt(score(it.x, it.y)) : '') + (r.hint ? ' <span>– ' + esc(r.hint) + '</span>' : '');
+  }
+
+  // Hinweise anklicken markiert die Einträge
+  $('wsHints').addEventListener('click', e => {
+    const b = e.target.closest('[data-hint]');
+    if (!b) return;
+    const h = hints().find(x => x.key === b.dataset.hint);
+    if (!h) return;
+    if (WS.hintKey === h.key) clearHighlight(); else { WS.hintKey = h.key; WS.highlight = new Set(h.items); }
+    renderAll();
+    const btn = $('wsHints').querySelector('[data-hint="' + CSS.escape(h.key) + '"]');
+    if (btn) btn.focus();
+  });
+
+  $('wsNames').addEventListener('change', e => { WS.names = e.target.checked; renderBoard(); });
+  if (matchMedia('(max-width: 600px)').matches) { WS.names = false; $('wsNames').checked = false; }
+  $('wsAdd').addEventListener('submit', e => {
+    e.preventDefault();
+    const v = $('wsNew').value.trim();
+    if (!v) return;
+    addItem(v);
+    $('wsNew').value = '';
+    renderAll();
+  });
+  $('wsReset').addEventListener('click', () => { loadExample(WS.method); switchMethod(WS.method); });
+  $('wsClear').addEventListener('click', () => { WS.data[WS.method] = []; switchMethod(WS.method); });
+
+  // Ziehen mit Maus, Stift oder Finger – aus der Fläche, aus dem Eingang und zurück
+  (function () {
+    let drag = null;
+    const svgFrac = (cx, cy) => {
+      const svg = $('wsMatrix').querySelector('svg');
+      const F = frame({});
+      const pt = svg.createSVGPoint();
+      pt.x = cx; pt.y = cy;
+      const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+      return { fx: (p.x - F.x) / F.w, fy: (p.y - F.y) / F.h, inside: p.x >= F.x - 12 && p.x <= F.x + F.w + 12 && p.y >= F.y - 12 && p.y <= F.y + F.h + 12 };
+    };
+    const overInbox = (cx, cy) => { const r = $('wsInbox').getBoundingClientRect(); return cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom; };
+    function start(e) {
+      if (e.button != null && e.button !== 0) return;
+      const el = e.target.closest('[data-id]');
+      // Klick in die leere Fläche hebt die Auswahl auf
+      if (!el) { if (WS.selected && e.currentTarget.id === 'wsMatrix') { WS.selected = null; renderAll(); } return; }
+      const it = itemById(el.dataset.id);
+      if (!it) return;
+      e.preventDefault();
+      WS.selected = it.id;
+      drag = { id: it.id, x0: e.clientX, y0: e.clientY, moved: false, fromInbox: it.x == null };
+      renderAll();
+      if (!drag.fromInbox) $('wsMatrix').querySelector('svg').focus({ preventScroll: true });
+    }
+    function move(e) {
+      if (!drag) return;
+      if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 4) return;
+      drag.moved = true;
+      const it = itemById(drag.id);
+      const f = svgFrac(e.clientX, e.clientY);
+      $('wsInbox').classList.toggle('drop', !drag.fromInbox && overInbox(e.clientX, e.clientY));
+      if (f.inside) {
+        const p = fromFrac(cfg(), f.fx, f.fy);
+        if (p.x !== it.x || p.y !== it.y) { setPos(it, p.x, p.y); renderBoard(); }
+      }
+    }
+    function end(e) {
+      if (!drag) return;
+      const it = itemById(drag.id);
+      if (drag.moved && it && !drag.fromInbox && overInbox(e.clientX, e.clientY)) setPos(it, null, null);
+      $('wsInbox').classList.remove('drop');
+      drag = null;
+      renderAll();
+    }
+    $('wsMatrix').addEventListener('pointerdown', start);
+    $('wsInboxItems').addEventListener('pointerdown', start);
+    // Tastatur: Eintrag im Eingang mit Enter/Leertaste auswählen
+    $('wsInboxItems').addEventListener('click', e => {
+      const el = e.target.closest('[data-id]');
+      if (!el || WS.selected === el.dataset.id) return;
+      WS.selected = el.dataset.id;
+      renderAll();
+      const chip = $('wsInboxItems').querySelector('[data-id="' + WS.selected + '"]');
+      if (chip) chip.focus();
+    });
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', end);
+    window.addEventListener('pointercancel', end);
+  })();
+
+  // Tastatur (in der Fläche bzw. im Eingang): Pfeiltasten, 1–n, 0, Entf, Esc – wie in der App
+  $('werkstatt').addEventListener('keydown', e => {
+    const t = e.target;
+    if (!t.closest('#wsMatrix, #wsInbox')) return;
+    const it = WS.selected && itemById(WS.selected);
+    if (e.key === 'Escape' && it) { WS.selected = null; renderAll(); return; }
+    if (!it) return;
+    const c = cfg();
+    const n = parseInt(e.key, 10);
+    if (!isNaN(n) && n >= 1 && n <= c.regions.length) { placeInRegion(it, n - 1); }
+    else if (e.key === '0') { setPos(it, null, null); }
+    else if (e.key === 'Delete' || e.key === 'Backspace') { removeItem(it.id); }
+    else if (e.key.startsWith('Arrow') && it.x != null) {
+      const ax = e.key === 'ArrowLeft' || e.key === 'ArrowRight' ? 'x' : 'y';
+      let d = e.key === 'ArrowRight' || e.key === 'ArrowUp' ? 1 : -1;
+      if (ax === 'x' && c.x.reverse) d = -d;
+      const a = c[ax];
+      const st = a.step > 0 ? a.step : (a.max - a.min) / 20;
+      it[ax] = snap(it[ax] + d * st, a.min, a.max, a.step);
+    } else return;
+    e.preventDefault();
+    renderAll();
+    if (t.closest('#wsMatrix') || t.closest('#wsInbox')) { const svg = $('wsMatrix').querySelector('svg'); if (svg) svg.focus({ preventScroll: true }); }
+  });
+
+  switchMethod('value-effort');
+
+  // ───────────────────────── Quiz ─────────────────────────
+  const quiz = [
+    { q: 'Eine Aufgabe ist wichtig, hat aber keinen nahen Termin. Wohin gehört sie in der Eisenhower-Matrix?',
+      a: ['Sofort erledigen', 'Einplanen', 'Delegieren'], ok: 1,
+      why: 'Wichtig, nicht dringend = „Einplanen“: Zeit blocken, bevor die Aufgabe dringend wird. Dieser Quadrant ist der wertvollste.' },
+    { q: 'Idee A hat Wert 8 bei Aufwand 2, Idee B Wert 9 bei Aufwand 6. Welche steht in der Rangfolge vorn?',
+      a: ['A – Wert ÷ Aufwand = 4', 'B – sie hat den höheren Wert', 'Beide gleich'], ok: 0,
+      why: 'Die Rangfolge der Wert/Aufwand-Matrix ist Wert ÷ Aufwand: A = 8 ÷ 2 = 4, B = 9 ÷ 6 = 1,5. A ist außerdem ein Quick Win.' },
+    { q: 'Ein Risiko hat Wahrscheinlichkeit 3 und Auswirkung 4. In welcher Stufe liegt es (Standard der App)?',
+      a: ['Mittel (5–9)', 'Hoch (10–14)', 'Sehr hoch (15–25)'], ok: 1,
+      why: '3 × 4 = 12 liegt zwischen 10 und 14 – „Hoch: Maßnahmen festlegen“. Die App weist auf hohe Risiken ohne Maßnahme hin.' },
+    { q: 'Ein Stakeholder hat großen Einfluss, aber wenig Interesse am Vorhaben. Was ist die passende Strategie?',
+      a: ['Eng einbinden', 'Zufriedenstellen', 'Beobachten'], ok: 1,
+      why: 'Viel Macht, wenig Interesse = „Zufriedenstellen“: Anforderungen erfüllen, aber nicht mit Details überfrachten.' },
+    { q: 'Anforderungen sind umstritten, die Technik ist teilweise neu. Welches Vorgehen empfiehlt die Stacey-Matrix?',
+      a: ['Checkliste abarbeiten', 'Detailplan nach Wasserfall', 'Iterativ in kleinen Schritten mit Feedback'], ok: 2,
+      why: 'Mittlere Unsicherheit bei Was und Wie liegt in der Zone „Komplex“: kleine Schritte, Feedback, Prototypen.' },
+    { q: 'Alle Einträge liegen ungefähr auf einer Diagonale von links unten nach rechts oben. Was ist die wahrscheinlichste Ursache?',
+      a: ['Die beiden Achsen messen fast dasselbe', 'Es wurden zu wenige Einträge erfasst', 'Die Skala ist zu fein'], ok: 0,
+      why: 'Hängen die Achsen zusammen (z. B. Wert und Umsatz), trennt die Matrix nichts. Gute Achsen sind unabhängig voneinander.' }
+  ];
+  const quizBox = document.getElementById('quizBox');
+  let qScore = 0, answered = 0;
+  quiz.forEach((item, i) => {
+    const d = document.createElement('div');
+    d.className = 'qz';
+    d.innerHTML = '<p>' + (i + 1) + '. ' + item.q + '</p><div class="opts"></div><div class="why">' + item.why + '</div>';
+    const opts = d.querySelector('.opts');
+    item.a.forEach((txt, j) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = txt;
+      b.addEventListener('click', () => {
+        opts.querySelectorAll('button').forEach((x, k) => {
+          x.disabled = true;
+          if (k === item.ok) x.classList.add('right');
+        });
+        if (j !== item.ok) b.classList.add('wrong'); else qScore++;
+        answered++;
+        d.classList.add('done');
+        if (answered === quiz.length) {
+          document.getElementById('quizScore').textContent =
+            qScore + ' von ' + quiz.length + ' richtig. ' + (qScore === quiz.length ? 'Stark – du bist bereit für deine erste eigene Matrix!' : 'Schau dir die Abschnitte oben gern noch einmal an.');
+        }
+      });
+      opts.appendChild(b);
+    });
+    quizBox.appendChild(d);
+  });
+</script>
+</body>
+</html>

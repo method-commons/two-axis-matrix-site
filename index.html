@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2-Achsen-Matrix</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%234f46e5'/%3E%3Cpath%20d='M8.5%206.5V23.5H25.5'%20fill='none'%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='14'%20cy='13.5'%20r='2.7'%20fill='%23fff'/%3E%3Ccircle%20cx='20.5'%20cy='18'%20r='2.7'%20fill='%23fff'/%3E%3Ccircle%20cx='21.5'%20cy='9.5'%20r='2.1'%20fill='%23fb923c'/%3E%3C/svg%3E">
-<meta name="description" content="Eine kompakte Schulung zu 2-Achsen-Methoden: Eisenhower-Matrix, Wert/Aufwand, Macht/Interesse, Risikomatrix und Stacey-Matrix – gute Achsen, sauberes Einordnen, Maßnahmen ableiten, mit Auswahlhilfe und Wissenscheck.">
+<meta name="description" content="Eine kompakte Schulung zu 2-Achsen-Methoden: Eisenhower-Matrix, Wert/Aufwand, Macht/Interesse, Risikomatrix, Stacey-Matrix, BCG-Matrix, GE-/McKinsey-Matrix, Kraljic-Matrix, Ansoff-Matrix und SWOT-Analyse – gute Achsen, sauberes Einordnen, Maßnahmen ableiten, mit Auswahlhilfe und Wissenscheck.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
@@ -260,7 +260,10 @@
   .h-q { stroke: var(--surface); stroke-width: 3; }
 
   /* Methoden-Reiter */
-  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 28px 0 20px; }
+  .tabs { display: grid; gap: 10px; margin: 28px 0 20px; }
+  .tab-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .tab-label { font: 600 .72rem Inter, sans-serif; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); width: 190px; flex-shrink: 0; }
+  @media (max-width: 960px) { .tab-label { width: 100%; } }
   .tab {
     display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px;
     border: 1px solid var(--line); background: var(--surface); color: var(--text); font: 600 .9rem Inter, sans-serif; cursor: pointer;
@@ -269,8 +272,9 @@
   .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
   .tab[aria-selected="true"] .ti { background: color-mix(in srgb, var(--accent-text) 22%, transparent); color: var(--accent-text); }
   @media (max-width: 640px) {
-    .tabs { flex-wrap: nowrap; overflow-x: auto; margin-left: -16px; margin-right: -16px; padding: 0 16px 6px; scrollbar-width: none; }
-    .tabs::-webkit-scrollbar { display: none; }
+    .tab-row { flex-wrap: nowrap; overflow-x: auto; margin-left: -16px; margin-right: -16px; padding: 0 16px 6px; scrollbar-width: none; }
+    .tab-row::-webkit-scrollbar { display: none; }
+    .tab-label { width: auto; margin-right: 4px; }
     .tab { flex-shrink: 0; }
   }
   .m-panel { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; align-items: start; }
@@ -417,14 +421,14 @@
       <div>
         <span class="eyebrow">Kurzschulung · Priorisieren &amp; Entscheiden</span>
         <h1>Zwei Achsen, klare Prioritäten</h1>
-        <p class="lead">Aufgaben, Ideen, Stakeholder, Risiken oder Vorhaben nach zwei Kriterien einordnen – und auf einen Blick sehen, was zu tun ist. In 20 Minuten lernst du die fünf gängigsten 2-Achsen-Methoden kennen, wählst die passende aus und ordnest sauber und begründet ein.</p>
+        <p class="lead">Aufgaben, Ideen, Stakeholder, Risiken, Produkte oder Vorhaben nach zwei Kriterien einordnen – und auf einen Blick sehen, was zu tun ist. In 25 Minuten lernst du die zehn gängigsten 2-Achsen-Methoden kennen, wählst die passende aus und ordnest sauber und begründet ein.</p>
         <div class="actions">
           <a class="btn btn-primary" href="#grundidee">Schulung starten ↓</a>
           <a class="btn btn-ghost" href="https://method-commons.github.io/two-axis-matrix-app/" target="_blank" rel="noopener">Zur Matrix-App ↗</a>
         </div>
         <div class="hero-meta">
-          <div><b>5</b>Methoden</div>
-          <div><b>~20 min</b>Lesezeit</div>
+          <div><b>10</b>Methoden</div>
+          <div><b>~25 min</b>Lesezeit</div>
           <div><b>3</b>Aufteilungen</div>
         </div>
       </div>
@@ -496,13 +500,13 @@
           <div class="mx mx-mini" data-mini="value-effort"></div>
           <h3>Vier Felder</h3>
           <p class="muted small">Zwei Trennlinien teilen die Fläche in vier Quadranten. Der Bereich ergibt sich daraus, ob ein Eintrag links/rechts und oben/unten der Linien liegt.</p>
-          <div class="ex"><b>Methoden</b>Eisenhower, Wert/Aufwand, Macht/Interesse</div>
+          <div class="ex"><b>Methoden</b>Eisenhower, Wert/Aufwand, Macht/Interesse, BCG, Kraljic, Ansoff, SWOT</div>
         </div>
         <div class="card layout-card">
           <div class="mx mx-mini" data-mini="risk"></div>
           <h3>Raster mit Stufen</h3>
           <p class="muted small">Jede Zelle hat einen Wert X × Y. Stufen legen fest, ab welchem Wert eine Zelle „mittel“, „hoch“ oder „sehr hoch“ ist.</p>
-          <div class="ex"><b>Methoden</b>Risikomatrix, Priorität = Häufigkeit × Schwere</div>
+          <div class="ex"><b>Methoden</b>Risikomatrix, GE-/McKinsey-Matrix</div>
         </div>
         <div class="card layout-card">
           <div class="mx mx-mini" data-mini="stacey"></div>
@@ -521,7 +525,7 @@
       <h2>In fünf Schritten von der Liste zur Entscheidung</h2>
       <p class="lead">Egal welche Methode: Der Ablauf ist immer gleich. Die meiste Qualität entsteht in Schritt 2 – wenn alle dasselbe unter „hoch“ verstehen.</p>
       <ol class="steps">
-        <li><div><h3>Frage klären und Methode wählen</h3><p>Was soll entschieden werden – was zuerst tun, wen einbinden, wogegen absichern, wie vorgehen? Daraus folgt die Methode und damit die beiden Achsen.</p><p class="tip"><b>In der App:</b> „Neue Matrix“ – Methode wählen, Vorschau mit Achsen, Skala und Bereichen.</p></div></li>
+        <li><div><h3>Frage klären und Methode wählen</h3><p>Was soll entschieden werden – was zuerst tun, wen einbinden, wogegen absichern, wie vorgehen, wo investieren, wie wachsen? Daraus folgt die Methode und damit die beiden Achsen.</p><p class="tip"><b>In der App:</b> „Neue Matrix“ – Methode wählen, Vorschau mit Achsen, Skala und Bereichen.</p></div></li>
         <li><div><h3>Achsen verankern</h3><p>Für jede Achse beschreiben, woran man „gering“ und „hoch“ erkennt – am besten mit Beispielen je Stufe. Ohne diese Verankerung meint jede Person etwas anderes.</p><p class="tip"><b>In der App:</b> „Achsen &amp; Bereiche“ – Name, Pole, Skala, Schritte und Richtung je Achse.</p></div></li>
         <li><div><h3>Einträge sammeln</h3><p>Erst alles erfassen, ohne zu bewerten: Aufgaben, Ideen, Beteiligte, Risiken. Wer beim Sammeln schon sortiert, vergisst die Hälfte.</p><p class="tip"><b>In der App:</b> Neue Einträge landen mit Enter im <em>Eingang</em>.</p></div></li>
         <li><div><h3>Einordnen – relativ und begründet</h3><p>Einträge in die Fläche ziehen und untereinander vergleichen: Ist A wichtiger als B? Eine kurze Begründung je Eintrag macht die Position nachvollziehbar.</p><p class="tip"><b>In der App:</b> Ziehen mit Maus, Stift oder Finger; Pfeiltasten verschieben, Taste 1–9 legt in einen Bereich.</p></div></li>
@@ -534,16 +538,25 @@
   <section id="methoden">
     <div class="wrap">
       <span class="eyebrow">03 · Methoden</span>
-      <h2>Fünf Vorlagen – und eine eigene</h2>
+      <h2>Zehn Vorlagen – und eine eigene</h2>
       <p class="lead">Jede Methode ist in der App eine Vorlage: Achsen, Bereiche, Felder je Eintrag und eigene Hinweise. Alles lässt sich später je Matrix anpassen.</p>
 
       <div class="tabs" role="tablist" aria-label="Methoden">
-        <button class="tab c-red" role="tab" id="tab-eisenhower" aria-controls="p-eisenhower" aria-selected="true" data-tab="eisenhower"><span class="ti" aria-hidden="true">⏱</span>Eisenhower</button>
-        <button class="tab c-green" role="tab" id="tab-value-effort" aria-controls="p-value-effort" aria-selected="false" tabindex="-1" data-tab="value-effort"><span class="ti" aria-hidden="true">◆</span>Wert/Aufwand</button>
-        <button class="tab c-orange" role="tab" id="tab-stakeholder" aria-controls="p-stakeholder" aria-selected="false" tabindex="-1" data-tab="stakeholder"><span class="ti" aria-hidden="true">◎</span>Macht/Interesse</button>
-        <button class="tab c-orange" role="tab" id="tab-risk" aria-controls="p-risk" aria-selected="false" tabindex="-1" data-tab="risk"><span class="ti" aria-hidden="true">▦</span>Risikomatrix</button>
-        <button class="tab c-violet" role="tab" id="tab-stacey" aria-controls="p-stacey" aria-selected="false" tabindex="-1" data-tab="stacey"><span class="ti" aria-hidden="true">◠</span>Stacey</button>
-        <button class="tab c-gray" role="tab" id="tab-custom" aria-controls="p-custom" aria-selected="false" tabindex="-1" data-tab="custom"><span class="ti" aria-hidden="true">✳</span>Eigene</button>
+        <div class="tab-row"><span class="tab-label">Priorisieren &amp; Einordnen</span>
+          <button class="tab c-red" role="tab" id="tab-eisenhower" aria-controls="p-eisenhower" aria-selected="true" data-tab="eisenhower"><span class="ti" aria-hidden="true">⏱</span>Eisenhower</button>
+          <button class="tab c-green" role="tab" id="tab-value-effort" aria-controls="p-value-effort" aria-selected="false" tabindex="-1" data-tab="value-effort"><span class="ti" aria-hidden="true">◆</span>Wert/Aufwand</button>
+          <button class="tab c-orange" role="tab" id="tab-stakeholder" aria-controls="p-stakeholder" aria-selected="false" tabindex="-1" data-tab="stakeholder"><span class="ti" aria-hidden="true">◎</span>Macht/Interesse</button>
+          <button class="tab c-orange" role="tab" id="tab-risk" aria-controls="p-risk" aria-selected="false" tabindex="-1" data-tab="risk"><span class="ti" aria-hidden="true">▦</span>Risikomatrix</button>
+          <button class="tab c-violet" role="tab" id="tab-stacey" aria-controls="p-stacey" aria-selected="false" tabindex="-1" data-tab="stacey"><span class="ti" aria-hidden="true">◠</span>Stacey</button>
+        </div>
+        <div class="tab-row"><span class="tab-label">Strategie &amp; Portfolio</span>
+          <button class="tab c-yellow" role="tab" id="tab-bcg" aria-controls="p-bcg" aria-selected="false" tabindex="-1" data-tab="bcg"><span class="ti" aria-hidden="true">★</span>BCG</button>
+          <button class="tab c-teal" role="tab" id="tab-ge-mckinsey" aria-controls="p-ge-mckinsey" aria-selected="false" tabindex="-1" data-tab="ge-mckinsey"><span class="ti" aria-hidden="true">▤</span>GE-/McKinsey</button>
+          <button class="tab c-teal" role="tab" id="tab-kraljic" aria-controls="p-kraljic" aria-selected="false" tabindex="-1" data-tab="kraljic"><span class="ti" aria-hidden="true">◇</span>Kraljic</button>
+          <button class="tab c-blue" role="tab" id="tab-ansoff" aria-controls="p-ansoff" aria-selected="false" tabindex="-1" data-tab="ansoff"><span class="ti" aria-hidden="true">↗</span>Ansoff</button>
+          <button class="tab c-green" role="tab" id="tab-swot" aria-controls="p-swot" aria-selected="false" tabindex="-1" data-tab="swot"><span class="ti" aria-hidden="true">⊞</span>SWOT</button>
+          <button class="tab c-gray" role="tab" id="tab-custom" aria-controls="p-custom" aria-selected="false" tabindex="-1" data-tab="custom"><span class="ti" aria-hidden="true">✳</span>Eigene</button>
+        </div>
       </div>
 
       <!-- Eisenhower -->
@@ -699,11 +712,162 @@
         </div>
       </div>
 
+      <!-- BCG-Matrix -->
+      <div class="card m-panel" role="tabpanel" id="p-bcg" aria-labelledby="tab-bcg" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">BCG-Matrix</h3>
+          <p class="aka">auch: Marktwachstum-Marktanteil-Portfolio, Boston-Matrix</p>
+          <p>Ordnet Produkte oder Geschäftsfelder nach dem <strong>relativen Marktanteil</strong> (eigener Anteil ÷ Anteil des größten Wettbewerbers) und dem <strong>Wachstum des Markts</strong>. Ein ausgewogenes Portfolio finanziert mit den Cash Cows die Stars und ausgewählte Question Marks; Poor Dogs binden Mittel, ohne viel beizutragen.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Relativer Marktanteil: gering → hoch (0–2; gezeichnet umgekehrt: „hoch“ steht wie üblich links; 1 = so groß wie der größte Wettbewerber)</span></div><div><b>Y</b><span>Marktwachstum (%): gering → hoch (0–20, Trennlinie bei 10 %)</span></div></div>
+          <h4>Bereiche</h4>
+          <div class="regions">
+            <div class="region c-yellow"><b>Stars</b><span>Marktführer im Wachstumsmarkt – investieren, Position halten</span></div>
+            <div class="region c-blue"><b>Question Marks</b><span>kleiner Anteil im Wachstumsmarkt – ausbauen oder aufgeben</span></div>
+            <div class="region c-green"><b>Cash Cows</b><span>Marktführer im gesättigten Markt – Gewinne abschöpfen</span></div>
+            <div class="region c-gray"><b>Poor Dogs</b><span>kleiner Anteil im gesättigten Markt – aufgeben oder neu ausrichten</span></div>
+          </div>
+          <h4>Je Produkt</h4>
+          <div class="chiprow"><span class="tag">Umsatzanteil</span><span class="tag">Normstrategie: ausbauen · halten · abschöpfen · aufgeben</span><span class="tag">Verantwortlich</span><span class="tag">Begründung</span></div>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Keine Cash Cow – oder: Portfolio trägt sich</li>
+            <li>Question Marks ohne Normstrategie entscheiden</li>
+            <li>Poor Dogs prüfen – aufgeben oder neu ausrichten?</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="bcg"></div>
+          <div class="ex"><b>Leitfragen</b>Womit verdienen wir heute das Geld – und womit morgen? Welche Question Marks können Stars werden, welche nicht? Wie groß ist unser Anteil im Vergleich zum größten Wettbewerber?</div>
+          <div class="ex"><b>Beispiel in der App</b>„Produktportfolio 2026“: Pommes klassisch als Cash Cow, Süßkartoffel-Pommes als Star, vegane Bowls und Firmen-Catering als Question Marks …</div>
+        </div>
+      </div>
+
+      <!-- GE-/McKinsey-Matrix -->
+      <div class="card m-panel" role="tabpanel" id="p-ge-mckinsey" aria-labelledby="tab-ge-mckinsey" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">GE-/McKinsey-Matrix</h3>
+          <p class="aka">auch: Neun-Felder-Matrix, Marktattraktivitäts-Wettbewerbsstärken-Portfolio</p>
+          <p>Bewertet Geschäftsfelder feiner als die BCG-Matrix: <strong>Marktattraktivität</strong> und eigene <strong>Wettbewerbsstärke</strong> werden je in drei Stufen eingeschätzt, meist aus mehreren Kriterien. Die drei Normstrategien liegen auf den Diagonalen: oben rechts investieren, in der Mitte selektiv vorgehen, unten links abschöpfen.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Relative Wettbewerbsstärke: gering → hoch (1–3)</span></div><div><b>Y</b><span>Marktattraktivität: gering → hoch (1–3)</span></div></div>
+          <h4>Stufen (Wettbewerbsstärke × Marktattraktivität)</h4>
+          <div class="regions">
+            <div class="region c-green"><b>Investieren · ab 6</b><span>wachsen, Position ausbauen</span></div>
+            <div class="region c-yellow"><b>Selektiv vorgehen · 3–4</b><span>gezielt ausbauen oder halten</span></div>
+            <div class="region c-red"><b>Abschöpfen · 1–2</b><span>Gewinne mitnehmen, Rückzug prüfen</span></div>
+          </div>
+          <h4>Je Geschäftsfeld</h4>
+          <div class="chiprow"><span class="tag">Maßnahme</span><span class="tag">Verantwortlich</span><span class="tag">Begründung</span><span class="tag">Rangfolge nach X × Y</span></div>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Investitionsschwerpunkte – oder: Geschäftsfelder zum Investieren ohne Maßnahme</li>
+            <li>Abschöpfen oder aufgeben</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="ge-mckinsey"></div>
+          <div class="ex"><b>Leitfragen</b>Was macht den Markt attraktiv – Größe, Wachstum, Marge, Wettbewerb? Worin sind wir stärker als andere – Preis, Qualität, Lage, Marke? Wohin fließen Zeit und Geld im nächsten Jahr?</div>
+          <div class="ex"><b>Beispiel in der App</b>„Geschäftsfelder 2027“: Wochenmarkt Domplatz, Stadtfeste, Mittag im Gewerbegebiet, Lieferdienst …</div>
+        </div>
+      </div>
+
+      <!-- Kraljic-Matrix -->
+      <div class="card m-panel" role="tabpanel" id="p-kraljic" aria-labelledby="tab-kraljic" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">Kraljic-Matrix</h3>
+          <p class="aka">auch: Einkaufsportfolio, Beschaffungsmatrix</p>
+          <p>Teilt den Einkauf nach zwei Fragen ein: Wie riskant ist die <strong>Versorgung</strong> (wenige Anbieter, lange Lieferzeit, knappes Gut)? Und wie stark wirkt sich das Material auf <strong>Kosten und Ergebnis</strong> aus? Jedes Feld hat eine eigene Einkaufsstrategie – so fließt die Aufmerksamkeit dorthin, wo Risiko oder Wirkung groß sind.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Versorgungsrisiko: gering → hoch (1–5)</span></div><div><b>Y</b><span>Einfluss auf das Ergebnis: gering → hoch (1–5)</span></div></div>
+          <h4>Bereiche</h4>
+          <div class="regions">
+            <div class="region c-red"><b>Strategische Produkte</b><span>Partnerschaft, langfristig absichern</span></div>
+            <div class="region c-blue"><b>Hebelprodukte</b><span>Marktmacht nutzen, Angebote vergleichen</span></div>
+            <div class="region c-orange"><b>Engpassprodukte</b><span>Versorgung sichern: Vorrat, Alternativen</span></div>
+            <div class="region c-gray"><b>Unkritische Produkte</b><span>Aufwand senken, bündeln, automatisieren</span></div>
+          </div>
+          <h4>Je Material</h4>
+          <div class="chiprow"><span class="tag">Lieferant</span><span class="tag">Einkaufsstrategie</span><span class="tag">Verantwortlich</span><span class="tag">Begründung</span></div>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Kritisch ohne Strategie – oder: Kritisches abgesichert</li>
+            <li>Engpässe absichern</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="kraljic"></div>
+          <div class="ex"><b>Leitfragen</b>Was passiert, wenn dieser Lieferant morgen ausfällt? Wie viel vom Einkaufsvolumen bzw. vom Gewinn hängt daran? Gibt es Alternativen – andere Lieferanten, andere Materialien?</div>
+          <div class="ex"><b>Beispiel in der App</b>„Einkauf Food-Truck“: Kartoffeln, Frittieröl, Gasflaschen, Ersatzteile für die Fritteuse …</div>
+        </div>
+      </div>
+
+      <!-- Ansoff-Matrix -->
+      <div class="card m-panel" role="tabpanel" id="p-ansoff" aria-labelledby="tab-ansoff" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">Ansoff-Matrix</h3>
+          <p class="aka">auch: Produkt-Markt-Matrix, Wachstumsstrategien</p>
+          <p>Ordnet Wachstumsideen danach, ob sie mit <strong>bestehenden oder neuen Produkten</strong> auf <strong>bestehenden oder neuen Märkten</strong> wachsen wollen. Das Risiko steigt von der Marktdurchdringung (Bekanntes für Bekannte) bis zur Diversifikation (Neues für Neue) – ein Wachstumsplan beginnt meist links oben.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Produkte: bestehend → neu</span></div><div><b>Y</b><span>Märkte: bestehend → neu (gezeichnet umgekehrt: „bestehend“ steht wie üblich oben)</span></div></div>
+          <h4>Bereiche</h4>
+          <div class="regions">
+            <div class="region c-green"><b>Marktdurchdringung</b><span>mehr vom Bestehenden an Bestehende – geringstes Risiko</span></div>
+            <div class="region c-blue"><b>Produktentwicklung</b><span>Neues für bestehende Kunden</span></div>
+            <div class="region c-orange"><b>Marktentwicklung</b><span>Bestehendes für neue Kunden, Orte, Kanäle</span></div>
+            <div class="region c-red"><b>Diversifikation</b><span>Neues für Neue – höchstes Risiko</span></div>
+          </div>
+          <h4>Je Wachstumsidee</h4>
+          <div class="chiprow"><span class="tag">Verantwortlich</span><span class="tag">Termin</span><span class="tag">Beschreibung</span></div>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Erst durchdringen? – noch keine Idee zur Marktdurchdringung</li>
+            <li>Viel Diversifikation – mehr als die Hälfte der Ideen</li>
+            <li>Breit aufgestellt – Ideen in mindestens drei Feldern</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="ansoff"></div>
+          <div class="ex"><b>Leitfragen</b>Können wir mit dem, was wir haben, mehr verkaufen? Was wünschen sich unsere Kunden zusätzlich? Wo gibt es Kunden, die uns noch nicht kennen?</div>
+          <div class="ex"><b>Beispiel in der App</b>„Wachstum 2027“: Kombi-Angebot Mittag, vegane Bowls, Wochenmarkt Nachbarstadt, eigene Saucen im Supermarkt …</div>
+        </div>
+      </div>
+
+      <!-- SWOT-Analyse -->
+      <div class="card m-panel" role="tabpanel" id="p-swot" aria-labelledby="tab-swot" hidden>
+        <div>
+          <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">SWOT-Analyse</h3>
+          <p class="aka">auch: Stärken-Schwächen-Chancen-Risiken, TOWS</p>
+          <p>Sammelt <strong>interne</strong> Faktoren (Stärken, Schwächen – im eigenen Einfluss) und <strong>externe</strong> Faktoren (Chancen, Risiken – im Umfeld). Sie ist ein Ausgangspunkt für Strategien, kein Ergebnis: Aus den Kombinationen entstehen Strategien (TOWS), etwa „Stärke nutzen, um eine Chance zu ergreifen“.</p>
+          <h4>Achsen</h4>
+          <div class="axes"><div><b>X</b><span>Wirkung: hilfreich → schädlich</span></div><div><b>Y</b><span>Ursprung: extern (Umfeld) → intern (wir selbst)</span></div></div>
+          <h4>Bereiche</h4>
+          <div class="regions">
+            <div class="region c-green"><b>Stärken</b><span>intern, hilfreich – ausbauen und nutzen</span></div>
+            <div class="region c-red"><b>Schwächen</b><span>intern, schädlich – abbauen</span></div>
+            <div class="region c-blue"><b>Chancen</b><span>extern, hilfreich – ergreifen</span></div>
+            <div class="region c-orange"><b>Risiken</b><span>extern, schädlich – abwehren</span></div>
+          </div>
+          <h4>Je Faktor</h4>
+          <div class="chiprow"><span class="tag">Strategie (TOWS)</span><span class="tag">Beleg / Beschreibung</span></div>
+          <h4>Hinweise der App</h4>
+          <ul class="plain">
+            <li>Feld leer – oder: alle Felder gefüllt</li>
+            <li>Strategien ableiten – Faktoren ohne Strategie</li>
+          </ul>
+        </div>
+        <div class="m-side">
+          <div class="mx mx-prev" data-preview="swot"></div>
+          <div class="ex"><b>Leitfragen</b>Was können wir besser als andere – und was schlechter? Was verändert sich im Umfeld: Kunden, Wettbewerb, Regeln, Preise? Welche Stärke hilft, eine Chance zu nutzen oder ein Risiko abzuwehren?</div>
+          <div class="ex"><b>Beispiel in der App</b>„SWOT Stellplatz Domplatz“: feste Stammkundschaft, nur eine Fritteuse, fester Stellplatz wird frei, steigende Ölpreise …</div>
+        </div>
+      </div>
+
       <!-- Eigene -->
       <div class="card m-panel" role="tabpanel" id="p-custom" aria-labelledby="tab-custom" hidden>
         <div>
           <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.5rem">Eigene Matrix</h3>
-          <p class="aka">freie Achsen, z. B. BCG, Kraljic, Dringlichkeit/Auswirkung</p>
+          <p class="aka">freie Achsen, z. B. Dringlichkeit/Auswirkung, Wollen/Können, Kundenportfolio</p>
           <p>Beginnt mit zwei freien Achsen von 0 bis 10 und vier neutralen Feldern (A–D). Unter „Achsen &amp; Bereiche“ legst du Beschriftungen, Skalen, Aufteilung, Darstellung, Farben und Felder je Eintrag selbst fest. Eine gelungene Einstellung speicherst du als <strong>eigene Vorlage</strong> für neue Matrizen.</p>
           <h4>Einstellbar</h4>
           <ul class="plain">
@@ -735,7 +899,7 @@
         </div>
         <div class="card" style="padding:18px 22px">
           <h3 style="margin-bottom:.3em">Faustregel</h3>
-          <p class="muted small" style="margin:0">Geht es um <strong>Zeit</strong> → Eisenhower. Um <strong>Nutzen</strong> → Wert/Aufwand. Um <strong>Menschen</strong> → Macht/Interesse. Um <strong>Gefahren</strong> → Risikomatrix. Um das <strong>Vorgehen</strong> → Stacey.</p>
+          <p class="muted small" style="margin:0">Geht es um <strong>Zeit</strong> → Eisenhower. Um <strong>Nutzen</strong> → Wert/Aufwand. Um <strong>Menschen</strong> → Macht/Interesse. Um <strong>Gefahren</strong> → Risikomatrix. Um das <strong>Vorgehen</strong> → Stacey. Um das <strong>Portfolio</strong> → BCG oder GE-/McKinsey. Um den <strong>Einkauf</strong> → Kraljic. Um <strong>Wachstum</strong> → Ansoff. Um die <strong>Ausgangslage</strong> → SWOT.</p>
         </div>
       </div>
       <p class="scroll-hint" style="margin-top:24px">← Tabelle seitlich wischen →</p>
@@ -748,6 +912,11 @@
             <tr><td>Wen müssen wir wie einbinden?</td><td><span class="mtag c-orange"><i>◎</i>Macht/Interesse</span></td><td>Personen, Gruppen, Organisationen</td><td>Strategie und Kommunikation je Gruppe</td></tr>
             <tr><td>Was kann schiefgehen – und was tun wir dagegen?</td><td><span class="mtag c-orange"><i>▦</i>Risikomatrix</span></td><td>Risiken</td><td>Risikostufen, Maßnahmen, Restrisiko</td></tr>
             <tr><td>Planen wir das durch oder probieren wir in Schritten?</td><td><span class="mtag c-violet"><i>◠</i>Stacey</span></td><td>Vorhaben, Projekte</td><td>Vorgehen je Zone</td></tr>
+            <tr><td>Welche Produkte tragen uns – heute und morgen?</td><td><span class="mtag c-yellow"><i>★</i>BCG</span></td><td>Produkte, Geschäftsfelder</td><td>Normstrategie: ausbauen, halten, abschöpfen, aufgeben</td></tr>
+            <tr><td>Wohin fließen Zeit und Geld im nächsten Jahr?</td><td><span class="mtag c-teal"><i>▤</i>GE-/McKinsey</span></td><td>Geschäftsfelder</td><td>Investieren, selektiv vorgehen, abschöpfen</td></tr>
+            <tr><td>Wie kaufen wir was ein?</td><td><span class="mtag c-teal"><i>◇</i>Kraljic</span></td><td>Materialien, Leistungen</td><td>Einkaufsstrategie je Feld</td></tr>
+            <tr><td>Wie wollen wir wachsen?</td><td><span class="mtag c-blue"><i>↗</i>Ansoff</span></td><td>Wachstumsideen</td><td>Wachstumsstrategie mit Risiko</td></tr>
+            <tr><td>Wo stehen wir – innen und außen?</td><td><span class="mtag c-green"><i>⊞</i>SWOT</span></td><td>Faktoren</td><td>Stärken, Schwächen, Chancen, Risiken und Strategien</td></tr>
             <tr><td>Keine passt genau?</td><td><span class="mtag c-gray"><i>✳</i>Eigene</span></td><td>beliebig</td><td>eigene Achsen, Bereiche, Felder</td></tr>
           </tbody>
         </table>
@@ -840,16 +1009,16 @@
       <h3 style="margin-top:44px">Bekannte Matrizen mit „Eigene Matrix“ nachbauen</h3>
       <div class="grid-3" style="margin-top:16px">
         <div class="card more-m">
-          <h3>BCG-Matrix</h3>
-          <p class="axes-s">X: relativer Marktanteil · Y: Marktwachstum · vier Felder</p>
-          <div class="q4"><span>Question Marks</span><span>Stars</span><span>Poor Dogs</span><span>Cash Cows</span></div>
-          <p class="how">Produkte oder Geschäftsfelder bewerten – wo investieren, wo ernten, wo aussteigen?</p>
+          <h3>Wollen / Können</h3>
+          <p class="axes-s">X: Können · Y: Wollen · vier Felder</p>
+          <div class="q4"><span>Anleiten</span><span>Delegieren</span><span>Anweisen</span><span>Motivieren</span></div>
+          <p class="how">Führung: Wie viel Unterstützung braucht eine Person für eine bestimmte Aufgabe?</p>
         </div>
         <div class="card more-m">
-          <h3>Kraljic-Matrix</h3>
-          <p class="axes-s">X: Versorgungsrisiko · Y: Ergebniseinfluss · vier Felder</p>
-          <div class="q4"><span>Hebelprodukte</span><span>Strategische</span><span>Unkritische</span><span>Engpassprodukte</span></div>
-          <p class="how">Einkauf: Für welche Güter lohnt sich welche Beschaffungsstrategie?</p>
+          <h3>Kundenportfolio</h3>
+          <p class="axes-s">X: Kundenwert heute · Y: Potenzial · vier Felder</p>
+          <div class="q4"><span>Entwicklungskunden</span><span>Starkunden</span><span>Mitnahmekunden</span><span>Ertragskunden</span></div>
+          <p class="how">Vertrieb: Welche Kunden pflegen, welche entwickeln, welche nur betreuen?</p>
         </div>
         <div class="card more-m">
           <h3>Dringlichkeit / Auswirkung</h3>
@@ -898,7 +1067,7 @@
   <section id="quiz">
     <div class="wrap">
       <span class="eyebrow">08 · Wissenscheck</span>
-      <h2>Sechs Fragen zum Abschluss</h2>
+      <h2>Acht Fragen zum Abschluss</h2>
       <p class="lead">Teste dein Verständnis. Die Erklärung erscheint nach deiner Antwort.</p>
       <div class="quiz" id="quizBox"></div>
       <p class="muted" id="quizScore" style="margin-top:16px"></p>
@@ -922,7 +1091,7 @@
 <footer class="site">
   <div class="wrap">
     <span>2-Achsen-Matrix · Kurzschulung · <a href="https://github.com/method-commons/two-axis-matrix-app" target="_blank" rel="noopener">App auf GitHub</a></span>
-    <span>Methodik nach Eisenhower und Covey, Mendelow, Stacey u. a. · Beispiele fiktiv</span>
+    <span>Methodik nach Eisenhower und Covey, Mendelow, Stacey, Henderson (BCG), Kraljic, Ansoff u. a. · Beispiele fiktiv</span>
   </div>
 </footer>
 
@@ -1051,6 +1220,87 @@
         ['Fester Stellplatz Domplatz', 1.8, 4.6], ['Umbau auf E-Truck', 8.8, 8.8]
       ]
     },
+    bcg: {
+      name: 'BCG-Matrix', layout: 'quadrants', view: 'plot',
+      x: { min: 0, max: 2, step: 0.1, reverse: true, label: 'Relativer Marktanteil', low: 'gering', high: 'hoch' },
+      y: { min: 0, max: 20, step: 1, label: 'Marktwachstum (%)', low: 'gering', high: 'hoch' },
+      split: { x: 1, y: 10 },
+      regions: [
+        { id: 'star', color: 'yellow', qx: 'high', qy: 'high', label: 'Stars', hint: 'Position halten, weiter investieren' },
+        { id: 'question', color: 'blue', qx: 'low', qy: 'high', label: 'Question Marks', hint: 'auswählen: ausbauen oder aufgeben' },
+        { id: 'cow', color: 'green', qx: 'high', qy: 'low', label: 'Cash Cows', hint: 'Gewinne abschöpfen, wenig investieren' },
+        { id: 'dog', color: 'gray', qx: 'low', qy: 'low', label: 'Poor Dogs', hint: 'aufgeben oder neu ausrichten' }
+      ],
+      items: [
+        ['Pommes klassisch', 1.6, 3], ['Süßkartoffel-Pommes', 1.3, 14], ['Vegane Bowls', 0.4, 16], ['Firmen-Catering', 0.3, 12],
+        ['Getränke', 1.2, 4], ['Currywurst', 0.6, 2], ['Burger', 0.5, 6]
+      ]
+    },
+    'ge-mckinsey': {
+      name: 'GE-/McKinsey-Matrix', layout: 'grid', view: 'heatmap',
+      x: { min: 1, max: 3, step: 1, label: 'Relative Wettbewerbsstärke', low: 'gering', high: 'hoch' },
+      y: { min: 1, max: 3, step: 1, label: 'Marktattraktivität', low: 'gering', high: 'hoch' },
+      regions: [
+        { id: 'harvest', color: 'red', min: 0, label: 'Abschöpfen' },
+        { id: 'selective', color: 'yellow', min: 3, label: 'Selektiv vorgehen' },
+        { id: 'invest', color: 'green', min: 6, label: 'Investieren' }
+      ],
+      items: [
+        ['Wochenmarkt Domplatz', 3, 3], ['Stadtfeste', 2, 3], ['Mittag im Gewerbegebiet', 3, 2], ['Firmen-Catering', 2, 2],
+        ['Uni-Campus', 1, 3], ['Hochzeiten', 1, 2], ['Lieferdienst', 1, 1]
+      ]
+    },
+    kraljic: {
+      name: 'Kraljic-Matrix', layout: 'quadrants', view: 'plot',
+      x: { min: 1, max: 5, step: 0.5, label: 'Versorgungsrisiko', low: 'gering', high: 'hoch' },
+      y: { min: 1, max: 5, step: 0.5, label: 'Einfluss auf das Ergebnis', low: 'gering', high: 'hoch' },
+      split: { x: 3, y: 3 },
+      regions: [
+        { id: 'leverage', color: 'blue', qx: 'low', qy: 'high', label: 'Hebelprodukte', hint: 'Marktmacht nutzen, Angebote vergleichen' },
+        { id: 'strategic', color: 'red', qx: 'high', qy: 'high', label: 'Strategische Produkte', hint: 'Partnerschaft, langfristig absichern' },
+        { id: 'routine', color: 'gray', qx: 'low', qy: 'low', label: 'Unkritische Produkte', hint: 'Aufwand senken, bündeln' },
+        { id: 'bottleneck', color: 'orange', qx: 'high', qy: 'low', label: 'Engpassprodukte', hint: 'Versorgung sichern' }
+      ],
+      items: [
+        ['Kartoffeln', 2, 4.5], ['Frittieröl', 4, 4.5], ['Bratwürste', 3.5, 4], ['Gasflaschen', 3.5, 2.5],
+        ['Ersatzteile Fritteuse', 4.5, 2], ['Chipotle für Spezialsauce', 4.5, 1.5], ['Verpackung', 1.5, 2.5], ['Servietten', 1, 1]
+      ]
+    },
+    ansoff: {
+      name: 'Ansoff-Matrix', layout: 'quadrants', view: 'board',
+      x: { min: 1, max: 2, step: 1, label: 'Produkte', low: 'bestehend', high: 'neu' },
+      y: { min: 1, max: 2, step: 1, reverse: true, label: 'Märkte', low: 'bestehend', high: 'neu' },
+      split: { x: 1.5, y: 1.5 },
+      regions: [
+        { id: 'penetration', color: 'green', qx: 'low', qy: 'low', label: 'Marktdurchdringung' },
+        { id: 'product', color: 'blue', qx: 'high', qy: 'low', label: 'Produktentwicklung' },
+        { id: 'market', color: 'orange', qx: 'low', qy: 'high', label: 'Marktentwicklung' },
+        { id: 'diversification', color: 'red', qx: 'high', qy: 'high', label: 'Diversifikation' }
+      ],
+      items: [
+        ['Kombi-Angebot Mittag', 1, 1, { owner: 'Ben' }], ['Stempelkarte', 1, 1], ['Vegane Bowls', 2, 1, { owner: 'Mia', due: '2027-03-01' }],
+        ['Saisonale Pommes-Sorten', 2, 1], ['Wochenmarkt Nachbarstadt', 1, 2, { owner: 'Lea' }], ['Firmen-Catering', 1, 2],
+        ['Eigene Saucen im Supermarkt', 2, 2], ['Kochkurse „Perfekte Pommes“', 2, 2]
+      ]
+    },
+    swot: {
+      name: 'SWOT-Analyse', layout: 'quadrants', view: 'board',
+      x: { min: 1, max: 2, step: 1, label: 'Wirkung', low: 'hilfreich', high: 'schädlich' },
+      y: { min: 1, max: 2, step: 1, label: 'Ursprung', low: 'extern', high: 'intern' },
+      split: { x: 1.5, y: 1.5 },
+      regions: [
+        { id: 'strengths', color: 'green', qx: 'low', qy: 'high', label: 'Stärken' },
+        { id: 'weaknesses', color: 'red', qx: 'high', qy: 'high', label: 'Schwächen' },
+        { id: 'opportunities', color: 'blue', qx: 'low', qy: 'low', label: 'Chancen' },
+        { id: 'threats', color: 'orange', qx: 'high', qy: 'low', label: 'Risiken' }
+      ],
+      items: [
+        ['Feste Stammkundschaft', 1, 2], ['Regionale Zutaten', 1, 2], ['Schnelle Ausgabe', 1, 2],
+        ['Nur eine Fritteuse', 2, 2], ['Stark wetterabhängig', 2, 2],
+        ['Fester Stellplatz wird frei', 1, 1], ['Nachfrage nach veganen Gerichten', 1, 1], ['Anfragen für Firmen-Catering', 1, 1],
+        ['Beschwerden der Anwohner', 2, 1], ['Steigende Ölpreise', 2, 1], ['Neue Burger-Kette am Bahnhof', 2, 1]
+      ]
+    },
     custom: {
       name: 'Eigene Matrix', layout: 'quadrants', view: 'plot',
       x: { min: 0, max: 10, step: 0, label: 'X-Achse', low: 'niedrig', high: 'hoch' },
@@ -1110,10 +1360,10 @@
     if (c.view === 'heatmap') {
       const xs = steps(c.x), ys = steps(c.y);
       const u = (xs.indexOf(x) + 0.5) / xs.length, v = (ys.indexOf(y) + 0.5) / ys.length;
-      return { fx: c.x.reverse ? 1 - u : u, fy: 1 - v };
+      return { fx: c.x.reverse ? 1 - u : u, fy: c.y.reverse ? v : 1 - v };
     }
     const u = norm(c.x, x), v = norm(c.y, y);
-    return { fx: c.x.reverse ? 1 - u : u, fy: 1 - v };
+    return { fx: c.x.reverse ? 1 - u : u, fy: c.y.reverse ? v : 1 - v };
   }
 
   function renderMatrix(c, items, opts) {
@@ -1125,7 +1375,7 @@
     // Bereiche
     const quad = r => {
       const sp = toFrac(c, c.split.x, c.split.y);
-      const right = (r.qx === 'high') !== !!c.x.reverse, top = r.qy === 'high';
+      const right = (r.qx === 'high') !== !!c.x.reverse, top = (r.qy === 'high') !== !!c.y.reverse;
       const [ax, ay] = P(right ? sp.fx : 0, top ? 0 : sp.fy), [bx, by] = P(right ? 1 : sp.fx, top ? sp.fy : 1);
       return { ax, ay, bx, by, right, top };
     };
@@ -1138,7 +1388,7 @@
       const [lx, ly] = P(sp.fx, sp.fy);
       s += '<path class="split" d="M' + lx + ' ' + F.y + 'V' + (F.y + F.h) + 'M' + F.x + ' ' + ly + 'H' + (F.x + F.w) + '"/>';
     } else if (c.layout === 'zones') {
-      const [ox, oy] = P(c.x.reverse ? 1 : 0, 1);
+      const [ox, oy] = P(c.x.reverse ? 1 : 0, c.y.reverse ? 0 : 1);
       c.regions.slice().sort((a, b) => b.r - a.r).forEach((r, i) => {
         s += i === 0
           ? '<rect class="rg c-' + r.color + '" x="' + F.x + '" y="' + F.y + '" width="' + F.w + '" height="' + F.h + '"/>'
@@ -1148,7 +1398,7 @@
       const xs = steps(c.x), ys = steps(c.y), cw = F.w / xs.length, ch = F.h / ys.length;
       xs.forEach((x, i) => ys.forEach((y, j) => {
         const r = regionAt(c, x, y);
-        const cx = F.x + (c.x.reverse ? xs.length - 1 - i : i) * cw, cy = F.y + (ys.length - 1 - j) * ch;
+        const cx = F.x + (c.x.reverse ? xs.length - 1 - i : i) * cw, cy = F.y + (c.y.reverse ? j : ys.length - 1 - j) * ch;
         s += '<g class="c-' + r.color + '"><rect class="rg-strong" x="' + cx + '" y="' + cy + '" width="' + cw + '" height="' + ch + '"/>';
         if (!opts.mini) s += '<text class="cs" x="' + (cx + cw - 6) + '" y="' + (cy + 14) + '" text-anchor="end">' + fmt(score(x, y)) + '</text>';
         s += '</g>';
@@ -1224,15 +1474,15 @@
       if (c.view === 'heatmap') {
         const xs = steps(c.x), ys = steps(c.y);
         xs.forEach((x, i) => { s += '<text class="tick" x="' + (F.x + (i + 0.5) * F.w / xs.length) + '" y="' + by + '" text-anchor="middle">' + x + '</text>'; });
-        ys.forEach((y, j) => { s += '<text class="tick" x="' + (F.x - 8) + '" y="' + (F.y + (ys.length - 1 - j + 0.5) * F.h / ys.length + 3) + '" text-anchor="end">' + y + '</text>'; });
+        ys.forEach((y, j) => { s += '<text class="tick" x="' + (F.x - 8) + '" y="' + (F.y + ((c.y.reverse ? j : ys.length - 1 - j) + 0.5) * F.h / ys.length + 3) + '" text-anchor="end">' + y + '</text>'; });
       }
       s += '<text class="pole" x="' + F.x + '" y="' + ly + '">' + esc(c.x.reverse ? c.x.high : c.x.low) + '</text>';
       s += '<text class="ax" x="' + (F.x + F.w / 2) + '" y="' + ly + '" text-anchor="middle">' + esc(c.x.label) + (c.x.reverse ? ' ←' : ' →') + '</text>';
       s += '<text class="pole" x="' + (F.x + F.w) + '" y="' + ly + '" text-anchor="end">' + esc(c.x.reverse ? c.x.low : c.x.high) + '</text>';
       const ax = F.x - (c.view === 'heatmap' ? 26 : 12);
-      s += '<g transform="translate(' + ax + ' ' + (F.y + F.h) + ') rotate(-90)"><text class="pole" x="0" y="0">' + esc(c.y.low) + '</text></g>';
-      s += '<g transform="translate(' + ax + ' ' + (F.y + F.h / 2) + ') rotate(-90)"><text class="ax" x="0" y="0" text-anchor="middle">' + esc(c.y.label) + ' →</text></g>';
-      s += '<g transform="translate(' + ax + ' ' + F.y + ') rotate(-90)"><text class="pole" x="0" y="0" text-anchor="end">' + esc(c.y.high) + '</text></g>';
+      s += '<g transform="translate(' + ax + ' ' + (F.y + F.h) + ') rotate(-90)"><text class="pole" x="0" y="0">' + esc(c.y.reverse ? c.y.high : c.y.low) + '</text></g>';
+      s += '<g transform="translate(' + ax + ' ' + (F.y + F.h / 2) + ') rotate(-90)"><text class="ax" x="0" y="0" text-anchor="middle">' + esc(c.y.label) + (c.y.reverse ? ' ←' : ' →') + '</text></g>';
+      s += '<g transform="translate(' + ax + ' ' + F.y + ') rotate(-90)"><text class="pole" x="0" y="0" text-anchor="end">' + esc(c.y.reverse ? c.y.low : c.y.high) + '</text></g>';
     }
     return s + '</svg>';
   }
@@ -1286,7 +1536,13 @@
       why: 'Mittlere Unsicherheit bei Was und Wie liegt in der Zone „Komplex“: kleine Schritte, Feedback, Prototypen.' },
     { q: 'Alle Einträge liegen ungefähr auf einer Diagonale von links unten nach rechts oben. Was ist die wahrscheinlichste Ursache?',
       a: ['Die beiden Achsen messen fast dasselbe', 'Es wurden zu wenige Einträge erfasst', 'Die Skala ist zu fein'], ok: 0,
-      why: 'Hängen die Achsen zusammen (z. B. Wert und Umsatz), trennt die Matrix nichts. Gute Achsen sind unabhängig voneinander.' }
+      why: 'Hängen die Achsen zusammen (z. B. Wert und Umsatz), trennt die Matrix nichts. Gute Achsen sind unabhängig voneinander.' },
+    { q: 'Ein Produkt ist Marktführer in einem kaum noch wachsenden Markt. Wo liegt es in der BCG-Matrix?',
+      a: ['Star', 'Cash Cow', 'Question Mark'], ok: 1,
+      why: 'Hoher relativer Marktanteil bei geringem Marktwachstum = Cash Cow: Gewinne abschöpfen und damit Stars und ausgewählte Question Marks finanzieren.' },
+    { q: 'In der SWOT-Analyse steht „Steigende Ölpreise“. Wohin gehört der Faktor?',
+      a: ['Schwächen', 'Risiken', 'Chancen'], ok: 1,
+      why: 'Steigende Preise kommen von außen (extern) und schaden (schädlich) – also ein Risiko. Schwächen sind intern, also im eigenen Einfluss.' }
   ];
   const quizBox = document.getElementById('quizBox');
   let qScore = 0, answered = 0;
